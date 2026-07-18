@@ -1,0 +1,38 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>SIEM Query Documentation — Enterprise SIEM Network</title>
+<link rel="icon" type="image/svg+xml" href="../img/logo.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{--pur:#8B5CF6;--mag:#D946EF;--pink:#EC4899;--ink:#1c1a26;--muted:#5b5b6b;--line:#e6e4ef}
+*{box-sizing:border-box}
+body{margin:0;font-family:Inter,system-ui,sans-serif;color:var(--ink);background:#f5f4fb;line-height:1.65}
+.doc-header{background:linear-gradient(120deg,#6D28D9,#D946EF 58%,#EC4899);color:#fff;padding:22px 0}
+.wrap{max-width:860px;margin:0 auto;padding:0 24px}
+.doc-header .k{font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.18em;text-transform:uppercase;opacity:.9}
+.doc-header h1{font-family:'Space Grotesk',sans-serif;margin:6px 0 0;font-size:1.55rem}
+.back{display:inline-block;margin:18px 0;color:var(--pur);font-weight:600;text-decoration:none;font-family:'Space Grotesk',sans-serif}
+.back:hover{color:var(--pink)}
+.paper{background:#fff;border:1px solid var(--line);border-radius:14px;padding:34px 40px;margin:0 0 24px;box-shadow:0 10px 40px rgba(30,20,60,.06);overflow-x:auto}
+.paper h1,.paper h2,.paper h3{font-family:'Space Grotesk',sans-serif;color:#3b1d6e;line-height:1.25}
+.paper h1{font-size:1.45rem}
+.paper h2{font-size:1.18rem;margin-top:1.6em;border-bottom:2px solid var(--line);padding-bottom:.3em}
+.paper h3{font-size:1.04rem;color:var(--mag)}
+.paper p{margin:.65em 0} .paper strong{color:#2a1650}
+.paper table{width:100%;border-collapse:collapse;margin:1.2em 0;font-size:.9rem}
+.paper th,.paper td{border:1px solid var(--line);padding:9px 12px;text-align:left;vertical-align:top}
+.paper th{background:#f3effc;font-family:'Space Grotesk',sans-serif;color:#3b1d6e}
+.paper tr:nth-child(even) td{background:#faf9fe}
+.paper ul,.paper ol{padding-left:1.3em}
+.paper img{max-width:100%;height:auto;border-radius:8px;border:1px solid var(--line);margin:1em 0}
+.paper a{color:var(--pink)}
+.sev{display:inline-block;padding:2px 11px;border-radius:999px;font-weight:600;font-size:.85em;font-family:'Space Grotesk',sans-serif;white-space:nowrap}
+.sev.crit{background:#fde2e2;color:#b91c1c;border:1px solid #f3b0b0}
+.sev.high{background:#ffe6d2;color:#c2410c;border:1px solid #f7c39a}
+.sev.med{background:#fef0c3;color:#9a6a06;border:1px solid #f2d98d}
+.sev.low{background:#d6f7e2;color:#15803d;border:1px solid #9fe0b8}
+.sev.info{background:#e5e7eb;color:#4b5563;border:1px solid #ccd1d8}
+.foot{text-align:center;color:var(--muted);font-size:.85rem;padding:0 0 40px}
+</style></head><body>
+<div class="doc-header"><div class="wrap"><div class="k">Enterprise SIEM Network · Documentation</div><h1>SIEM Query Documentation</h1></div></div>
+<div class="wrap"><a class="back" href="../../documentation.html">&larr; Back to Documentation</a><div class="paper"><p><strong>SIEM Query Documentation</strong></p><p>UPCI SOC/SIEM Independent Study  •  Tristen Dennis •  Supervisor: Michael Sauer</p><p><strong>SECURITY ONION — ATTACKER &amp; TARGET HUNTING</strong></p><table><thead><tr><th><p><strong>Query</strong></p></th><th><p><strong>Purpose</strong></p></th></tr><tr><th><p>source.ip:10.0.40.200</p></th><th><p>All traffic originating from the attacker (Kali) — a single query to see the full campaign</p></th></tr><tr><th><p>source.ip:10.0.40.200 | groupby event.dataset</p></th><th><p>Attacker activity broken down by data type (alerts, conn, dns, http, etc.)</p></th></tr><tr><th><p>source.ip:10.0.40.200 | groupby destination.ip</p></th><th><p>Every host the attacker touched </p></th></tr><tr><th><p>source.ip:10.0.40.200 | groupby destination.port</p></th><th><p>The services and ports the attacker targeted</p></th></tr><tr><th><p>source.ip:10.0.40.200 AND event.severity_label:high</p></th><th><p>The attacker's activity that triggered high-severity alerts </p></th></tr><tr><th><p>destination.ip:10.0.30.10 | groupby event.dataset</p></th><th><p>Everything hitting the domain controller, by data type</p></th></tr><tr><th><p>destination.ip:10.0.30.40</p></th><th><p>Traffic to the Windows 11 host (lateral movement target)</p></th></tr><tr><th><p>destination.ip:10.0.30.80</p></th><th><p>Traffic to DVWA (web application attacks)</p></th></tr><tr><th><p>destination.ip:10.0.30.30</p></th><th><p>Traffic to Metasploitable (ProFTPD exploitation)</p></th></tr></thead></table><p><strong>SECURITY ONION — ALERTS &amp; ZEEK DATASETS</strong></p><table><thead><tr><th><p><strong>Query</strong></p></th><th><p><strong>Purpose</strong></p></th></tr><tr><th><p>event.dataset:alert | groupby rule.name</p></th><th><p>Every Suricata alert type that fired, grouped by signature </p></th></tr><tr><th><p>event.module:zeek | groupby event.dataset</p></th><th><p>Lists all available Zeek datasets on the sensor</p></th></tr><tr><th><p>event.dataset:zeek.kerberos</p></th><th><p>Kerberos activity — where Kerberoasting ticket requests appear (port 88)</p></th></tr><tr><th><p>event.dataset:zeek.conn</p></th><th><p>Raw connection logs — source/dest, ports, bytes, connection state</p></th></tr><tr><th><p>event.dataset:zeek.http</p></th><th><p>Web request logs — where the DVWA attacks appear</p></th></tr><tr><th><p>event.dataset:zeek.dns</p></th><th><p>DNS query logs — useful for spotting tunneling or beaconing patterns</p></th></tr></thead></table><p><strong>WAZUH — HOST &amp; WINDOWS EVENT HUNTING</strong></p><table><thead><tr><th><p><strong>Query</strong></p></th><th><p><strong>Purpose</strong></p></th></tr><tr><th><p>data.win.system.eventID:4624</p></th><th><p>Successful logons — surfaces the lateral movement authentications</p></th></tr><tr><th><p>data.win.system.eventID:4769</p></th><th><p>Kerberos service ticket requests </p></th></tr><tr><th><p>data.win.system.eventID:4672</p></th><th><p>Special privileges assigned — admin-level logon sessions</p></th></tr><tr><th><p>rule.mitre.id:T1550.002</p></th><th><p>Pass-the-Hash </p></th></tr><tr><th><p>rule.mitre.id:T1078</p></th><th><p>Valid Accounts </p></th></tr><tr><th><p>agent.name:DC01</p></th><th><p>All events reported by the domain controller agent</p></th></tr><tr><th><p>rule.level:7</p></th><th><p>Wazuh alerts at rule level 7 </p></th></tr><tr><th><p>rule.description:*sudo*</p></th><th><p>Catches privilege-escalation activity (e.g. sudo to root on the Linux targets)</p></th></tr></thead></table><p><strong>NOTES</strong></p><p>Security Onion's Hunt interface returns far more detail than the Alerts page, since it exposes the underlying Zeek logs and not just the events that triggered a signature. </p></div><p class="foot">Designed, built, and documented by Tristen Dennis</p></div>
+</body></html>

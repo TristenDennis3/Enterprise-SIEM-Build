@@ -1,6 +1,6 @@
 # SIEM Security Operations Center Lab
 
-A multi-page cybersecurity portfolio showcasing a fully segmented SIEM lab —
+A multi-page cybersecurity portfolio showcasing a fully segmented SOC/SIEM home lab —
 four isolated VLANs, dual SIEM platforms, live adversary emulation, and custom
 detection engineering.
 

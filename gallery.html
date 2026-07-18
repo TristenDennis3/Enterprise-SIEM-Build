@@ -3,9 +3,13 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Gallery — SIEM SOC Lab</title>
-  <meta name="description" content="The finished build and the story of assembling it from nothing — the completed SOC lab and its build-process timeline.">
+  <title>Gallery — Enterprise SIEM Network</title>
+  <meta name="description" content="The finished build and the story of assembling the air-gapped Enterprise SIEM Network from a hardware haul to a live operations desk.">
   <meta name="author" content="Tristen Dennis">
+  <meta property="og:title" content="Gallery — Enterprise SIEM Network">
+  <meta property="og:description" content="The completed SIEM Network and its full build story.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://tristendennis3.github.io/Enterprise-SIEM-Build/assets/img/build/finished-1.jpg">
   <link rel="icon" type="image/svg+xml" href="assets/img/logo.svg">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -14,23 +18,26 @@
 </head>
 <body>
   <div class="bg-fixed"></div>
-  <canvas id="bg-canvas"></canvas>
+  <div id="bg-layer" aria-hidden="true"></div>
+  <div id="cursor-glow"></div>
+  <div id="scroll-bar"></div>
 
   <nav class="nav">
     <div class="nav-inner">
-      <a class="brand" href="index.html" aria-label="SIEM SOC Lab — Home">
+      <a class="brand" href="index.html" aria-label="Enterprise SIEM Network — Home">
         <img class="monogram" src="assets/img/logo.svg" alt="TD monogram">
-        <span class="brand-text"><span class="wordmark">SIEM SOC Lab</span><span class="sub">Security Operations Center</span></span>
+        <span class="brand-text"><span class="wordmark">SIEM Network</span><span class="sub">Air-Gapped · Enterprise</span></span>
       </a>
       <button class="nav-toggle" aria-label="Toggle menu" aria-expanded="false"><span></span><span></span><span></span></button>
       <ul class="nav-links">
         <li><a href="index.html">Home</a></li>
+        <li><a href="gallery.html" class="active">Gallery</a></li>
         <li><a href="diagram.html">Diagram</a></li>
         <li><a href="hardware.html">Hardware</a></li>
         <li><a href="software.html">Software</a></li>
-        <li><a href="attacks.html">Attacks &amp; Detections</a></li>
+        <li><a href="attacks.html">Attacks</a></li>
         <li><a href="detection-rules.html">Detection Rules</a></li>
-        <li><a href="gallery.html" class="active">Gallery</a></li>
+        <li><a href="documentation.html">Docs</a></li>
       </ul>
     </div>
   </nav>
@@ -42,12 +49,12 @@
         <div class="section-head">
           <span class="eyebrow">The Build</span>
           <h2>Finished Build</h2>
-          <p>The completed Security Operations Center — rack, sensors, and dashboards, live.</p>
+          <p>The completed Enterprise SIEM Network — rack, sensors, and dashboards, live.</p>
         </div>
 
-        <div class="shot feature reveal" data-lightbox data-src="assets/img/build/finished-1.jpg" data-cap="The completed Security Operations Center">
-          <img src="assets/img/build/finished-1.jpg" alt="The completed Security Operations Center — multi-monitor SOC with RGB rack and host">
-          <span class="cap">The completed Security Operations Center</span>
+        <div class="shot feature reveal" data-lightbox data-src="assets/img/build/finished-1.jpg" data-cap="The completed Enterprise SIEM Network">
+          <img src="assets/img/build/finished-1.jpg" alt="The completed Enterprise SIEM Network — multi-monitor operations desk with RGB rack and host">
+          <span class="cap">The completed Enterprise SIEM Network</span>
         </div>
 
         <div class="gallery-grid hero-grid">
@@ -56,7 +63,7 @@
             <span class="cap">Live operations — SIEM consoles &amp; Kali</span>
           </div>
           <div class="shot reveal" data-lightbox data-src="assets/img/build/finished-3.jpg" data-cap="Tristen Dennis with the completed build">
-            <img src="assets/img/build/finished-3.jpg" alt="Tristen Dennis standing with the completed SOC lab" loading="lazy">
+            <img src="assets/img/build/finished-3.jpg" alt="Tristen Dennis standing with the completed SIEM Network" loading="lazy">
             <span class="cap">Tristen Dennis with the completed build</span>
           </div>
           <div class="shot reveal" data-lightbox data-src="assets/img/build/finished-4.jpg" data-cap="Live detections — Wazuh, Security Onion &amp; BloodHound">
@@ -87,15 +94,15 @@
     <section class="section" style="padding-top:0;">
       <div class="container">
         <div class="section-head">
-          <span class="eyebrow">From Nothing</span>
+          <span class="eyebrow">The Story</span>
           <h2>Build Process</h2>
-          <p>The step-by-step story of building the lab from an empty rack.</p>
+          <p>The step-by-step story of building the network from an empty rack.</p>
         </div>
 
         <div class="timeline">
-          <div class="shot reveal" data-lightbox data-src="assets/img/build/process-1.jpg" data-cap="Parts haul — every component arrives">
-            <img src="assets/img/build/process-1.jpg" alt="Parts haul — every component boxed and ready" loading="lazy">
-            <span class="cap"><span class="step">01</span> &nbsp;Parts haul</span>
+          <div class="shot reveal" data-lightbox data-src="assets/img/build/process-1.jpg" data-cap="Hardware haul — every component arrives">
+            <img src="assets/img/build/process-1.jpg" alt="Hardware haul — every component boxed and ready" loading="lazy">
+            <span class="cap"><span class="step">01</span> &nbsp;Hardware haul</span>
           </div>
           <div class="shot reveal" data-lightbox data-src="assets/img/build/process-2.jpg" data-cap="Rack frame assembly">
             <img src="assets/img/build/process-2.jpg" alt="Wall-mount rack frame during assembly" loading="lazy">
@@ -138,19 +145,16 @@
     </section>
   </main>
 
+  <button id="to-top" aria-label="Back to top"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 19V5M5 12l7-7 7 7"/></svg></button>
   <footer class="footer">
     <div class="container footer-inner">
-      <div class="fbrand">
-        <img class="monogram" src="assets/img/logo.svg" alt="TD monogram">
-        <p>Designed, built, and documented by <strong style="color:var(--text)">Tristen Dennis</strong></p>
-      </div>
+      <div class="fbrand"><img class="monogram" src="assets/img/logo.svg" alt="TD monogram"><p>Designed, built, and documented by <strong style="color:var(--text)">Tristen Dennis</strong></p></div>
       <div class="social">
         <a href="https://github.com/TristenDennis3" target="_blank" rel="noopener" aria-label="GitHub"><svg width="19" height="19" viewBox="0 0 24 24" fill="currentColor"><path d="M12 .5C5.7.5.5 5.7.5 12c0 5.1 3.3 9.4 7.9 10.9.6.1.8-.2.8-.6v-2c-3.2.7-3.9-1.4-3.9-1.4-.5-1.3-1.3-1.7-1.3-1.7-1.1-.7.1-.7.1-.7 1.2.1 1.8 1.2 1.8 1.2 1 1.8 2.7 1.3 3.4 1 .1-.8.4-1.3.7-1.6-2.6-.3-5.3-1.3-5.3-5.7 0-1.3.5-2.3 1.2-3.1-.1-.3-.5-1.5.1-3.1 0 0 1-.3 3.3 1.2a11.5 11.5 0 0 1 6 0C17 5.3 18 5.6 18 5.6c.6 1.6.2 2.8.1 3.1.7.8 1.2 1.8 1.2 3.1 0 4.4-2.7 5.4-5.3 5.7.4.4.8 1.1.8 2.2v3.3c0 .4.2.7.8.6 4.6-1.5 7.9-5.8 7.9-10.9C23.5 5.7 18.3.5 12 .5z"/></svg></a>
-        <a href="#" rel="noopener" aria-label="LinkedIn (link coming soon)" title="LinkedIn — link coming soon"><svg width="19" height="19" viewBox="0 0 24 24" fill="currentColor"><path d="M20.4 3H3.6A.6.6 0 0 0 3 3.6v16.8a.6.6 0 0 0 .6.6h16.8a.6.6 0 0 0 .6-.6V3.6a.6.6 0 0 0-.6-.6zM8.3 18.3H5.5V9.5h2.8v8.8zM6.9 8.3a1.6 1.6 0 1 1 0-3.2 1.6 1.6 0 0 1 0 3.2zm11.4 10h-2.8v-4.3c0-1 0-2.3-1.4-2.3s-1.6 1.1-1.6 2.3v4.4H9.7V9.5h2.7v1.2h.1c.4-.7 1.3-1.4 2.6-1.4 2.8 0 3.3 1.8 3.3 4.2v4.8z"/></svg></a>
+        <a href="https://www.linkedin.com/in/tristen-dennis" target="_blank" rel="noopener" aria-label="LinkedIn"><svg width="19" height="19" viewBox="0 0 24 24" fill="currentColor"><path d="M20.4 3H3.6A.6.6 0 0 0 3 3.6v16.8a.6.6 0 0 0 .6.6h16.8a.6.6 0 0 0 .6-.6V3.6a.6.6 0 0 0-.6-.6zM8.3 18.3H5.5V9.5h2.8v8.8zM6.9 8.3a1.6 1.6 0 1 1 0-3.2 1.6 1.6 0 0 1 0 3.2zm11.4 10h-2.8v-4.3c0-1 0-2.3-1.4-2.3s-1.6 1.1-1.6 2.3v4.4H9.7V9.5h2.7v1.2h.1c.4-.7 1.3-1.4 2.6-1.4 2.8 0 3.3 1.8 3.3 4.2v4.8z"/></svg></a>
       </div>
     </div>
   </footer>
-
   <script src="assets/js/main.js"></script>
 </body>
 </html>
