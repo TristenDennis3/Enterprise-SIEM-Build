@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Hardware — Enterprise SIEM Network</title>
+  <meta name="description" content="The physical build: Netgate firewall, UniFi L3 switch, Proxmox host, Legion 7i, and the full rack of the air-gapped SIEM Network.">
+  <meta name="author" content="Tristen Dennis">
+  <meta property="og:title" content="Hardware — Enterprise SIEM Network">
+  <meta property="og:description" content="Netgate firewall, UniFi L3 switch, Proxmox host, and the full rack.">
+  <meta property="og:type" content="website">
+  <link rel="icon" type="image/svg+xml" href="assets/img/logo.svg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/css/styles.css">
+</head>
+<body>
+  <div class="bg-fixed"></div>
+  <div id="bg-layer" aria-hidden="true"></div>
+  <div id="cursor-glow"></div>
+  <div id="scroll-bar"></div>
+
+  <nav class="nav">
+    <div class="nav-inner">
+      <a class="brand" href="index.html" aria-label="Enterprise SIEM Network — Home">
+        <img class="monogram" src="assets/img/logo.svg" alt="TD monogram">
+        <span class="brand-text"><span class="wordmark">SIEM Network</span><span class="sub">Air-Gapped · Enterprise</span></span>
+      </a>
+      <button class="nav-toggle" aria-label="Toggle menu" aria-expanded="false"><span></span><span></span><span></span></button>
+      <ul class="nav-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="gallery.html">Gallery</a></li>
+        <li><a href="diagram.html">Diagram</a></li>
+        <li><a href="hardware.html" class="active">Hardware</a></li>
+        <li><a href="detection-rules.html">Detection Rules</a></li>
+        <li><a href="software.html">Software</a></li>
+        <li><a href="attacks.html">Attacks</a></li>
+        <li><a href="documentation.html">Docs</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <main>
+    <section class="section">
+      <div class="container">
+        <div class="section-head">
+          <span class="eyebrow">The Build</span>
+          <h2>Hardware</h2>
+          <p>Every component in the rack and on the desk. Hover (or tap) a card — the ↻ corner flips it to its role in the network.</p>
+        </div>
+
+        <div class="card-grid">
+          <!-- 1 Legion 7i -->
+          <div class="flip reveal" style="--accent:#EF4444;--accent-glow:rgba(239,68,68,0.42);"><div class="flip-inner">
+            <div class="flip-face flip-front"><span class="flip-cue"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12a9 9 0 1 1-3-6.7M21 3v5h-5"/></svg></span>
+              <div class="img-wrap"><img src="https://c1.neweggimages.com/productimage/nb640/34-840-621-11.jpg" alt="Lenovo Legion 7i laptop" loading="lazy" onerror="this.onerror=null;this.src='assets/img/placeholder.svg';"></div>
+              <div class="caption"><span class="bar"></span> Legion 7i</div></div>
+            <div class="flip-face flip-back"><h3>Legion 7i</h3><p>Manages the entire network. Accesses admin interfaces.</p><p>Hosts virtual machines with Kali Linux and Windows to attack vulnerable VMs.</p><p>Runs attacks that simulate a real-world threat actor.</p></div>
+          </div></div>
+
+          <!-- 2 Ryzen Proxmox host -->
+          <div class="flip reveal" style="--accent:#F97316;--accent-glow:rgba(249,115,22,0.42);"><div class="flip-inner">
+            <div class="flip-face flip-front"><span class="flip-cue"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12a9 9 0 1 1-3-6.7M21 3v5h-5"/></svg></span>
+              <div class="img-wrap photo"><img src="assets/img/pc.jpg" alt="Ryzen desktop — Proxmox host with RGB cooling" loading="lazy" onerror="this.onerror=null;this.parentElement.classList.remove('photo');this.src='assets/img/placeholder.svg';"></div>
+              <div class="caption"><span class="bar"></span> Ryzen Proxmox Host</div></div>
+            <div class="flip-face flip-back"><h3>Ryzen 5 7600X · RTX 5070 · 32 GB RAM · 2 TB SSD</h3><p>Used for Security Information and Event Management, log aggregation, and threat detection. Hosts 6 vulnerable VMs.</p></div>
+          </div></div>
+
+          <!-- 3 UniFi switch -->
+          <div class="flip reveal" style="--accent:#FBBF24;--accent-glow:rgba(251,191,36,0.42);"><div class="flip-inner">
+            <div class="flip-face flip-front"><span class="flip-cue"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12a9 9 0 1 1-3-6.7M21 3v5h-5"/></svg></span>
+              <div class="img-wrap"><img src="https://m.media-amazon.com/images/I/51o0i-4oXuL.jpg" alt="UniFi USW-Pro-Max-16-PoE switch" loading="lazy" onerror="this.onerror=null;this.src='assets/img/placeholder.svg';"></div>
+              <div class="caption"><span class="bar"></span> UniFi L3 Switch</div></div>
+            <div class="flip-face flip-back"><h3>USW-Pro-Max-16-PoE UniFi Layer 3 Switch</h3><p>Handles all VLAN tagging so each zone stays separate at the network level. A SPAN mirror port copies all traffic from every VLAN and sends it straight to Security Onion.</p></div>
+          </div></div>
+
+          <!-- 4 CyberPower UPS -->
+          <div class="flip reveal" style="--accent:#34D399;--accent-glow:rgba(52,211,153,0.42);"><div class="flip-inner">
+            <div class="flip-face flip-front"><span class="flip-cue"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12a9 9 0 1 1-3-6.7M21 3v5h-5"/></svg></span>
+              <div class="img-wrap"><img src="https://www.cyberpowersystems.com/wp-content/uploads/2026/03/gx150c2-front-vertical-photo-1.jpg" alt="CyberPower UPS" loading="lazy" onerror="this.onerror=null;this.src='assets/img/placeholder.svg';"></div>
+              <div class="caption"><span class="bar"></span> CyberPower UPS</div></div>
+            <div class="flip-face flip-back"><h3>CyberPower UPS</h3><p>Hardware protection, surge protection, and battery backup for the entire rack.</p></div>
+          </div></div>
+
+          <!-- 5 Netgate 2100 -->
+          <div class="flip reveal" style="--accent:#22D3EE;--accent-glow:rgba(34,211,238,0.42);"><div class="flip-inner">
+            <div class="flip-face flip-front"><span class="flip-cue"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12a9 9 0 1 1-3-6.7M21 3v5h-5"/></svg></span>
+              <div class="img-wrap"><img src="https://imageinnetwork.fr/33-medium_default/netgate-2100-security-appliance-with-pfsense-software.jpg" alt="Netgate 2100 with pfSense" loading="lazy" onerror="this.onerror=null;this.src='assets/img/placeholder.svg';"></div>
+              <div class="caption"><span class="bar"></span> Netgate 2100 Firewall</div></div>
+            <div class="flip-face flip-back"><h3>Netgate 2100 · Firewall / Router / Gateway</h3><p>Gatekeeper of the entire network — nothing moves without going through here first. Handles all inter-VLAN routing and firewall rules, so I control exactly what can talk to what. Enterprise grade; all attacks are logged here before they reach targets.</p></div>
+          </div></div>
+
+          <!-- 6 49" Curved Monitor -->
+          <div class="flip reveal" style="--accent:#3B82F6;--accent-glow:rgba(59,130,246,0.42);"><div class="flip-inner">
+            <div class="flip-face flip-front"><span class="flip-cue"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12a9 9 0 1 1-3-6.7M21 3v5h-5"/></svg></span>
+              <div class="img-wrap"><img src="https://www.nfm.com/dw/image/v2/BDFM_PRD/on/demandware.static/-/Sites-nfm-master-catalog/default/dw86a4965e/images/066/86/66866914-1.jpg?sw=1000&sh=1000&sm=fit" alt="49 inch curved monitor" loading="lazy" onerror="this.onerror=null;this.src='assets/img/placeholder.svg';"></div>
+              <div class="caption"><span class="bar"></span> 49" Curved Monitor</div></div>
+            <div class="flip-face flip-back"><h3>49" Curved Monitor</h3><p>For multi-pane tasks such as SIEM monitoring — running Wazuh, Security Onion, and ELK dashboards side by side.</p></div>
+          </div></div>
+
+          <!-- 7 Patch Panel -->
+          <div class="flip reveal" style="--accent:#6366F1;--accent-glow:rgba(99,102,241,0.42);"><div class="flip-inner">
+            <div class="flip-face flip-front"><span class="flip-cue"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12a9 9 0 1 1-3-6.7M21 3v5h-5"/></svg></span>
+              <div class="img-wrap"><img src="https://m.media-amazon.com/images/I/71YA8PsNVgL._SL1500_.jpg" alt="Network patch panel" loading="lazy" onerror="this.onerror=null;this.src='assets/img/placeholder.svg';"></div>
+              <div class="caption"><span class="bar"></span> Patch Panel</div></div>
+            <div class="flip-face flip-back"><h3>Patch Panel</h3><p>Makes VLAN trunk and access connections clean and intentional instead of a tangled mess. Every connection is labeled for troubleshooting.</p></div>
+          </div></div>
+
+          <!-- 8 Cooling & Airflow Panel -->
+          <div class="flip reveal" style="--accent:#8B5CF6;--accent-glow:rgba(139,92,246,0.42);"><div class="flip-inner">
+            <div class="flip-face flip-front"><span class="flip-cue"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12a9 9 0 1 1-3-6.7M21 3v5h-5"/></svg></span>
+              <div class="img-wrap"><img src="https://m.media-amazon.com/images/I/61ZqgJDEP8L._SL1000_.jpg" alt="Rack cooling and airflow panel" loading="lazy" onerror="this.onerror=null;this.src='assets/img/placeholder.svg';"></div>
+              <div class="caption"><span class="bar"></span> Cooling &amp; Airflow Panel</div></div>
+            <div class="flip-face flip-back"><h3>Rack Cooling &amp; Airflow Panel</h3><p>Maintains safe temperatures for the hardware and displays the temperature inside the server rack.</p></div>
+          </div></div>
+
+          <!-- 9 Server Rack -->
+          <div class="flip reveal" style="--accent:#A855F7;--accent-glow:rgba(168,85,247,0.42);"><div class="flip-inner">
+            <div class="flip-face flip-front"><span class="flip-cue"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12a9 9 0 1 1-3-6.7M21 3v5h-5"/></svg></span>
+              <div class="img-wrap"><img src="https://m.media-amazon.com/images/I/61yQ6CJ5o3L._SL1500_.jpg" alt="Wall mounted server rack" loading="lazy" onerror="this.onerror=null;this.src='assets/img/placeholder.svg';"></div>
+              <div class="caption"><span class="bar"></span> Server Rack</div></div>
+            <div class="flip-face flip-back"><h3>Server Rack</h3><p>Houses my pfSense firewall, UniFi switch, and shelf in one clean wall-mounted enclosure. When complete it looks like it belongs in a data center.</p></div>
+          </div></div>
+
+          <!-- 10 Triple Arm Mount -->
+          <div class="flip reveal" style="--accent:#D946EF;--accent-glow:rgba(217,70,239,0.42);"><div class="flip-inner">
+            <div class="flip-face flip-front"><span class="flip-cue"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12a9 9 0 1 1-3-6.7M21 3v5h-5"/></svg></span>
+              <div class="img-wrap"><img src="https://m.media-amazon.com/images/I/61MYYmMxyxL._AC_SL1500_.jpg" alt="Triple monitor arm mount" loading="lazy" onerror="this.onerror=null;this.src='assets/img/placeholder.svg';"></div>
+              <div class="caption"><span class="bar"></span> Triple Arm Mount</div></div>
+            <div class="flip-face flip-back"><h3>Triple Arm Mount</h3><p>Mounts my 32" monitor vertically next to the 49" monitor, and holds my laptop in a laptop tray.</p></div>
+          </div></div>
+
+          <!-- 11 Jet KVM -->
+          <div class="flip reveal" style="--accent:#EC4899;--accent-glow:rgba(236,72,153,0.42);"><div class="flip-inner">
+            <div class="flip-face flip-front"><span class="flip-cue"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12a9 9 0 1 1-3-6.7M21 3v5h-5"/></svg></span>
+              <div class="img-wrap"><img src="https://m.media-amazon.com/images/I/718qaHKh5gL._AC_SL1424_.jpg" alt="JetKVM out-of-band KVM device" loading="lazy" onerror="this.onerror=null;this.src='assets/img/placeholder.svg';"></div>
+              <div class="caption"><span class="bar"></span> JetKVM</div></div>
+            <div class="flip-face flip-back"><h3>JetKVM</h3><p>Provides out-of-band remote access to machines at the BIOS level — full keyboard, video, and mouse control over any device without needing an OS or network connection. Essential for managing headless servers like the Proxmox host and recovering machines that have become unreachable through normal remote access.</p></div>
+          </div></div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <button id="to-top" aria-label="Back to top"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 19V5M5 12l7-7 7 7"/></svg></button>
+  <footer class="footer">
+    <div class="container footer-inner">
+      <div class="fbrand"><img class="monogram" src="assets/img/logo.svg" alt="TD monogram"><p>Designed, built, and documented by <strong style="color:var(--text)">Tristen Dennis</strong></p></div>
+      <div class="social">
+        <a href="https://github.com/TristenDennis3" target="_blank" rel="noopener" aria-label="GitHub"><svg width="19" height="19" viewBox="0 0 24 24" fill="currentColor"><path d="M12 .5C5.7.5.5 5.7.5 12c0 5.1 3.3 9.4 7.9 10.9.6.1.8-.2.8-.6v-2c-3.2.7-3.9-1.4-3.9-1.4-.5-1.3-1.3-1.7-1.3-1.7-1.1-.7.1-.7.1-.7 1.2.1 1.8 1.2 1.8 1.2 1 1.8 2.7 1.3 3.4 1 .1-.8.4-1.3.7-1.6-2.6-.3-5.3-1.3-5.3-5.7 0-1.3.5-2.3 1.2-3.1-.1-.3-.5-1.5.1-3.1 0 0 1-.3 3.3 1.2a11.5 11.5 0 0 1 6 0C17 5.3 18 5.6 18 5.6c.6 1.6.2 2.8.1 3.1.7.8 1.2 1.8 1.2 3.1 0 4.4-2.7 5.4-5.3 5.7.4.4.8 1.1.8 2.2v3.3c0 .4.2.7.8.6 4.6-1.5 7.9-5.8 7.9-10.9C23.5 5.7 18.3.5 12 .5z"/></svg></a>
+        <a href="https://www.linkedin.com/in/tristen-dennis" target="_blank" rel="noopener" aria-label="LinkedIn"><svg width="19" height="19" viewBox="0 0 24 24" fill="currentColor"><path d="M20.4 3H3.6A.6.6 0 0 0 3 3.6v16.8a.6.6 0 0 0 .6.6h16.8a.6.6 0 0 0 .6-.6V3.6a.6.6 0 0 0-.6-.6zM8.3 18.3H5.5V9.5h2.8v8.8zM6.9 8.3a1.6 1.6 0 1 1 0-3.2 1.6 1.6 0 0 1 0 3.2zm11.4 10h-2.8v-4.3c0-1 0-2.3-1.4-2.3s-1.6 1.1-1.6 2.3v4.4H9.7V9.5h2.7v1.2h.1c.4-.7 1.3-1.4 2.6-1.4 2.8 0 3.3 1.8 3.3 4.2v4.8z"/></svg></a>
+      </div>
+    </div>
+  </footer>
+  <script src="assets/js/main.js"></script>
+</body>
+</html>

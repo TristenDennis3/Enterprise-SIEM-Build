@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Enterprise SIEM Network — Tristen Dennis</title>
+  <meta name="description" content="A fully segmented, air-gapped SIEM Network: four isolated VLANs, dual SIEM platforms, live adversary emulation, and custom detection engineering. Designed & built by Tristen Dennis.">
+  <meta name="author" content="Tristen Dennis">
+  <meta property="og:title" content="Enterprise SIEM Network — Tristen Dennis">
+  <meta property="og:description" content="An air-gapped SIEM Network with dual SIEM platforms, live adversary emulation, and custom detection engineering.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://tristendennis3.github.io/Enterprise-SIEM-Build/assets/img/build/finished-1.jpg">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="icon" type="image/svg+xml" href="assets/img/logo.svg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/css/styles.css">
+</head>
+<body>
+  <div class="bg-fixed"></div>
+  <div id="bg-layer" aria-hidden="true"></div>
+  <div id="cursor-glow"></div>
+  <div id="scroll-bar"></div>
+
+  <nav class="nav">
+    <div class="nav-inner">
+      <a class="brand" href="index.html" aria-label="Enterprise SIEM Network — Home">
+        <img class="monogram" src="assets/img/logo.svg" alt="TD monogram">
+        <span class="brand-text"><span class="wordmark">SIEM Network</span><span class="sub">Air-Gapped · Enterprise</span></span>
+      </a>
+      <button class="nav-toggle" aria-label="Toggle menu" aria-expanded="false"><span></span><span></span><span></span></button>
+      <ul class="nav-links">
+        <li><a href="index.html" class="active">Home</a></li>
+        <li><a href="gallery.html">Gallery</a></li>
+        <li><a href="diagram.html">Diagram</a></li>
+        <li><a href="hardware.html">Hardware</a></li>
+        <li><a href="detection-rules.html">Detection Rules</a></li>
+        <li><a href="software.html">Software</a></li>
+        <li><a href="attacks.html">Attacks</a></li>
+        <li><a href="documentation.html">Docs</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <main>
+    <!-- HERO -->
+    <header class="hero">
+      <span class="hero-badge"><span class="dot"></span> Air-Gapped SIEM Network</span>
+      <h1><span class="grad-text">Enterprise SIEM Network</span></h1>
+      <p class="tagline">Designed &amp; Built by <strong>Tristen Dennis</strong></p>
+      <div class="hero-actions">
+        <a class="btn btn-primary" href="attacks.html">Explore Attacks &amp; Detections</a>
+        <a class="btn btn-ghost" href="gallery.html">See the Build</a>
+      </div>
+
+      <div class="terminal" aria-hidden="true">
+        <div class="terminal-bar">
+          <span class="tdot r"></span><span class="tdot y"></span><span class="tdot g"></span>
+          <span class="title">analyst@siem-network: ~ — writing a Security Onion rule</span>
+        </div>
+        <div class="terminal-body" id="terminal-body"></div>
+      </div>
+    </header>
+
+    <!-- FINISHED-BUILD SHOWCASE -->
+    <section class="section-tight">
+      <div class="container">
+        <div class="showcase reveal" data-lightbox data-src="assets/img/build/finished-1.jpg" data-cap="The completed Enterprise SIEM Network">
+          <img src="assets/img/build/finished-1.jpg" alt="The completed Enterprise SIEM Network — multi-monitor operations desk with RGB rack and host" loading="lazy">
+          <div class="cap">The completed Enterprise SIEM Network — live sensors, dashboards, and the full rack.</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- OVERVIEW -->
+    <section class="section" style="padding-top:var(--s-6);">
+      <div class="container">
+        <div class="section-head">
+          <span class="eyebrow">The Network</span>
+          <h2>An air-gapped model of enterprise detection</h2>
+        </div>
+        <div class="card reveal" style="max-width:820px;margin:0 auto;text-align:center;">
+          <p style="font-size:1.1rem;line-height:1.75;margin:0;color:var(--text);">
+            A fully segmented, <strong style="color:var(--text)">air-gapped SIEM Network</strong> that simulates real attacks
+            and detects them across network and host sensors. Four isolated VLANs, dual SIEM platforms, live adversary
+            emulation, and custom detection engineering &mdash; Security Information and Event Management, engineered end to end.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- MITRE CHART -->
+    <section class="section" style="padding-top:0;">
+      <div class="container">
+        <div class="section-head">
+          <span class="eyebrow">Detection Coverage</span>
+          <h2>MITRE ATT&amp;CK Coverage</h2>
+          <p>Ten real attacks detected across six ATT&amp;CK tactics &mdash; every one caught by network or host sensors.</p>
+        </div>
+        <div class="card reveal" style="max-width:860px;margin:0 auto;">
+          <div class="chart">
+            <div class="chart-row">
+              <div class="lbl">Credential Access</div>
+              <div><div class="chart-track"><div class="chart-fill" data-pct="100"><span class="val">3 detected</span></div></div><div class="ids">T1558.003 · T1003.006 · T1110</div></div>
+            </div>
+            <div class="chart-row">
+              <div class="lbl">Lateral Movement</div>
+              <div><div class="chart-track"><div class="chart-fill" data-pct="67"><span class="val">2 detected</span></div></div><div class="ids">T1550.002 · T1210</div></div>
+            </div>
+            <div class="chart-row">
+              <div class="lbl">Execution</div>
+              <div><div class="chart-track"><div class="chart-fill" data-pct="67"><span class="val">2 detected</span></div></div><div class="ids">T1059 (XSS · Command Injection)</div></div>
+            </div>
+            <div class="chart-row">
+              <div class="lbl">Discovery</div>
+              <div><div class="chart-track"><div class="chart-fill" data-pct="33"><span class="val">1 detected</span></div></div><div class="ids">T1046</div></div>
+            </div>
+            <div class="chart-row">
+              <div class="lbl">Initial Access</div>
+              <div><div class="chart-track"><div class="chart-fill" data-pct="33"><span class="val">1 detected</span></div></div><div class="ids">T1190</div></div>
+            </div>
+            <div class="chart-row">
+              <div class="lbl">Command &amp; Control</div>
+              <div><div class="chart-track"><div class="chart-fill" data-pct="33"><span class="val">1 detected</span></div></div><div class="ids">T1071</div></div>
+            </div>
+          </div>
+          <p class="chart-note">Attacks detected per ATT&amp;CK tactic · full commands &amp; sensors on the Attacks page.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- NAV CARDS -->
+    <section class="section" style="padding-top:0;">
+      <div class="container">
+        <div class="section-head">
+          <span class="eyebrow">Explore</span>
+          <h2>Inside the network</h2>
+        </div>
+        <div class="navcards">
+          <a class="card navcard reveal" href="gallery.html" style="--nc:#EC4899;--ncg:rgba(236,72,153,0.4);">
+            <span class="ico">📸</span><h3>Gallery</h3><p>The finished build and the story of assembling it.</p><span class="arrow">View gallery →</span>
+          </a>
+          <a class="card navcard reveal" href="diagram.html" style="--nc:#8B5CF6;--ncg:rgba(139,92,246,0.4);">
+            <span class="ico">🗺️</span><h3>Network Diagram</h3><p>Four segmented VLANs and a SPAN mirror into the SIEM.</p><span class="arrow">View diagram →</span>
+          </a>
+          <a class="card navcard reveal" href="hardware.html" style="--nc:#3B82F6;--ncg:rgba(59,130,246,0.4);">
+            <span class="ico">🖥️</span><h3>Hardware</h3><p>Netgate firewall, UniFi L3 switch, Proxmox host, the rack.</p><span class="arrow">See the gear →</span>
+          </a>
+          <a class="card navcard reveal" href="attacks.html" style="--nc:#22D3EE;--ncg:rgba(34,211,238,0.4);">
+            <span class="ico">🎯</span><h3>Attacks &amp; Detections</h3><p>Ten real attacks — the exact commands and what caught each.</p><span class="arrow">See detections →</span>
+          </a>
+          <a class="card navcard reveal" href="detection-rules.html" style="--nc:#34D399;--ncg:rgba(52,211,153,0.4);">
+            <span class="ico">🛡️</span><h3>Detection Rules</h3><p>Custom rules I wrote and validated by running the attack.</p><span class="arrow">Read the rules →</span>
+          </a>
+          <a class="card navcard reveal" href="documentation.html" style="--nc:#F59E0B;--ncg:rgba(245,158,11,0.4);">
+            <span class="ico">📄</span><h3>Documentation</h3><p>Written investigations and configuration docs.</p><span class="arrow">Open docs →</span>
+          </a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <button id="to-top" aria-label="Back to top"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 19V5M5 12l7-7 7 7"/></svg></button>
+
+  <footer class="footer">
+    <div class="container footer-inner">
+      <div class="fbrand">
+        <img class="monogram" src="assets/img/logo.svg" alt="TD monogram">
+        <p>Designed, built, and documented by <strong style="color:var(--text)">Tristen Dennis</strong></p>
+      </div>
+      <div class="social">
+        <a href="https://github.com/TristenDennis3" target="_blank" rel="noopener" aria-label="GitHub"><svg width="19" height="19" viewBox="0 0 24 24" fill="currentColor"><path d="M12 .5C5.7.5.5 5.7.5 12c0 5.1 3.3 9.4 7.9 10.9.6.1.8-.2.8-.6v-2c-3.2.7-3.9-1.4-3.9-1.4-.5-1.3-1.3-1.7-1.3-1.7-1.1-.7.1-.7.1-.7 1.2.1 1.8 1.2 1.8 1.2 1 1.8 2.7 1.3 3.4 1 .1-.8.4-1.3.7-1.6-2.6-.3-5.3-1.3-5.3-5.7 0-1.3.5-2.3 1.2-3.1-.1-.3-.5-1.5.1-3.1 0 0 1-.3 3.3 1.2a11.5 11.5 0 0 1 6 0C17 5.3 18 5.6 18 5.6c.6 1.6.2 2.8.1 3.1.7.8 1.2 1.8 1.2 3.1 0 4.4-2.7 5.4-5.3 5.7.4.4.8 1.1.8 2.2v3.3c0 .4.2.7.8.6 4.6-1.5 7.9-5.8 7.9-10.9C23.5 5.7 18.3.5 12 .5z"/></svg></a>
+        <a href="https://www.linkedin.com/in/tristen-dennis" target="_blank" rel="noopener" aria-label="LinkedIn"><svg width="19" height="19" viewBox="0 0 24 24" fill="currentColor"><path d="M20.4 3H3.6A.6.6 0 0 0 3 3.6v16.8a.6.6 0 0 0 .6.6h16.8a.6.6 0 0 0 .6-.6V3.6a.6.6 0 0 0-.6-.6zM8.3 18.3H5.5V9.5h2.8v8.8zM6.9 8.3a1.6 1.6 0 1 1 0-3.2 1.6 1.6 0 0 1 0 3.2zm11.4 10h-2.8v-4.3c0-1 0-2.3-1.4-2.3s-1.6 1.1-1.6 2.3v4.4H9.7V9.5h2.7v1.2h.1c.4-.7 1.3-1.4 2.6-1.4 2.8 0 3.3 1.8 3.3 4.2v4.8z"/></svg></a>
+      </div>
+    </div>
+  </footer>
+
+  <script src="assets/js/main.js"></script>
+</body>
+</html>
