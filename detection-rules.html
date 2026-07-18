@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Detection Rules — SIEM SOC Lab</title>
+  <meta name="description" content="Custom Wazuh detection rules I wrote and validated by running the matching attack — Kerberoasting, noise suppression, attack-subnet auth, and brute-force correlation.">
+  <meta name="author" content="Tristen Dennis">
+  <link rel="icon" type="image/svg+xml" href="assets/img/logo.svg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/css/styles.css">
+</head>
+<body>
+  <div class="bg-fixed"></div>
+  <canvas id="bg-canvas"></canvas>
+
+  <nav class="nav">
+    <div class="nav-inner">
+      <a class="brand" href="index.html" aria-label="SIEM SOC Lab — Home">
+        <img class="monogram" src="assets/img/logo.svg" alt="TD monogram">
+        <span class="brand-text"><span class="wordmark">SIEM SOC Lab</span><span class="sub">Security Operations Center</span></span>
+      </a>
+      <button class="nav-toggle" aria-label="Toggle menu" aria-expanded="false"><span></span><span></span><span></span></button>
+      <ul class="nav-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="diagram.html">Diagram</a></li>
+        <li><a href="hardware.html">Hardware</a></li>
+        <li><a href="software.html">Software</a></li>
+        <li><a href="attacks.html">Attacks &amp; Detections</a></li>
+        <li><a href="detection-rules.html" class="active">Detection Rules</a></li>
+        <li><a href="gallery.html">Gallery</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <main>
+    <section class="section">
+      <div class="container">
+        <div class="section-head">
+          <span class="eyebrow">Detection Engineering</span>
+          <h2>Detection Rules</h2>
+          <p>Custom detection rules I wrote and validated by running the matching attack. Deployed to Wazuh at <code class="inline-code">/var/ossec/etc/rules/local_rules.xml</code>.</p>
+        </div>
+
+        <div class="rules">
+
+          <!-- Rule 100150 -->
+          <div class="card rule reveal" style="--accent:#8B5CF6;--accent-glow:rgba(139,92,246,0.4);">
+            <div class="rule-head">
+              <h3>Rule 100150 — Kerberoasting Detection</h3>
+              <span class="pill ok">Validated</span>
+            </div>
+            <p class="rule-sub"><span class="badge">T1558.003</span> &nbsp;Fires on Event 4769 with RC4 encryption (0x17).</p>
+            <div class="code"><span class="tag">&lt;group</span> <span class="attr">name</span>=<span class="val">"windows,kerberoasting,"</span><span class="tag">&gt;</span>
+  <span class="tag">&lt;rule</span> <span class="attr">id</span>=<span class="val">"100150"</span> <span class="attr">level</span>=<span class="val">"12"</span><span class="tag">&gt;</span>
+    <span class="tag">&lt;if_sid&gt;</span><span class="txt">60103</span><span class="tag">&lt;/if_sid&gt;</span>
+    <span class="tag">&lt;field</span> <span class="attr">name</span>=<span class="val">"win.system.eventID"</span><span class="tag">&gt;</span><span class="txt">^4769$</span><span class="tag">&lt;/field&gt;</span>
+    <span class="tag">&lt;field</span> <span class="attr">name</span>=<span class="val">"win.eventdata.ticketEncryptionType"</span><span class="tag">&gt;</span><span class="txt">^0x17$</span><span class="tag">&lt;/field&gt;</span>
+    <span class="tag">&lt;description&gt;</span><span class="txt">Possible Kerberoasting: RC4 service ticket requested (4769, 0x17)</span><span class="tag">&lt;/description&gt;</span>
+    <span class="tag">&lt;mitre&gt;&lt;id&gt;</span><span class="txt">T1558.003</span><span class="tag">&lt;/id&gt;&lt;/mitre&gt;</span>
+    <span class="tag">&lt;options&gt;</span><span class="txt">no_full_log</span><span class="tag">&lt;/options&gt;</span>
+  <span class="tag">&lt;/rule&gt;</span>
+<span class="tag">&lt;/group&gt;</span></div>
+            <p class="validate">Validated with:<br><code class="inline-code">impacket-GetUserSPNs siemlab.local/frankenstein:password123! -dc-ip 10.0.30.10 -request</code></p>
+          </div>
+
+          <!-- Rule 100160 -->
+          <div class="card rule reveal" style="--accent:#3B82F6;--accent-glow:rgba(59,130,246,0.4);">
+            <div class="rule-head">
+              <h3>Rule 100160 — Noise Suppression</h3>
+              <span class="pill ok">Validated</span>
+            </div>
+            <p class="rule-sub">Silences benign DC01$ machine-account logon noise (level 0) to cut alert fatigue while keeping real logons alerting.</p>
+            <div class="code"><span class="tag">&lt;group</span> <span class="attr">name</span>=<span class="val">"windows,noise_reduction,"</span><span class="tag">&gt;</span>
+  <span class="tag">&lt;rule</span> <span class="attr">id</span>=<span class="val">"100160"</span> <span class="attr">level</span>=<span class="val">"0"</span><span class="tag">&gt;</span>
+    <span class="tag">&lt;if_sid&gt;</span><span class="txt">60106</span><span class="tag">&lt;/if_sid&gt;</span>
+    <span class="tag">&lt;field</span> <span class="attr">name</span>=<span class="val">"win.eventdata.targetUserName"</span><span class="tag">&gt;</span><span class="txt">^DC01\$$</span><span class="tag">&lt;/field&gt;</span>
+    <span class="tag">&lt;description&gt;</span><span class="txt">Benign DC01 machine account logon - suppressed to reduce noise</span><span class="tag">&lt;/description&gt;</span>
+  <span class="tag">&lt;/rule&gt;</span>
+<span class="tag">&lt;/group&gt;</span></div>
+            <p class="validate">Suppresses machine-account logon events that would otherwise flood the analyst queue.</p>
+          </div>
+
+          <!-- Rule 100170 -->
+          <div class="card rule reveal" style="--accent:#D946EF;--accent-glow:rgba(217,70,239,0.4);">
+            <div class="rule-head">
+              <h3>Rule 100170 — Auth From Attack Subnet</h3>
+              <span class="pill ok">Validated</span>
+            </div>
+            <p class="rule-sub"><span class="badge">T1078</span> &nbsp;Fires on any authentication sourced from the attack VLAN (10.0.40.0/24).</p>
+            <div class="code"><span class="tag">&lt;group</span> <span class="attr">name</span>=<span class="val">"windows,attack_subnet,"</span><span class="tag">&gt;</span>
+  <span class="tag">&lt;rule</span> <span class="attr">id</span>=<span class="val">"100170"</span> <span class="attr">level</span>=<span class="val">"12"</span><span class="tag">&gt;</span>
+    <span class="tag">&lt;if_sid&gt;</span><span class="txt">60103</span><span class="tag">&lt;/if_sid&gt;</span>
+    <span class="tag">&lt;field</span> <span class="attr">name</span>=<span class="val">"win.eventdata.ipAddress"</span><span class="tag">&gt;</span><span class="txt">^10\.0\.40\.</span><span class="tag">&lt;/field&gt;</span>
+    <span class="tag">&lt;description&gt;</span><span class="txt">Authentication from attack subnet (10.0.40.0/24) - possible intrusion</span><span class="tag">&lt;/description&gt;</span>
+    <span class="tag">&lt;mitre&gt;&lt;id&gt;</span><span class="txt">T1078</span><span class="tag">&lt;/id&gt;&lt;/mitre&gt;</span>
+  <span class="tag">&lt;/rule&gt;</span>
+<span class="tag">&lt;/group&gt;</span></div>
+            <p class="validate">Any successful or failed auth from the Kali attack subnet immediately raises a level-12 alert.</p>
+          </div>
+
+          <!-- Rules 100200 / 100201 -->
+          <div class="card rule reveal" style="--accent:#22D3EE;--accent-glow:rgba(34,211,238,0.4);">
+            <div class="rule-head">
+              <h3>Rules 100200 / 100201 — Brute Force + Success Correlation</h3>
+              <span style="display:flex;gap:6px;flex-wrap:wrap;"><span class="pill ok">100200 Validated</span><span class="pill pending">100201 Pending</span></span>
+            </div>
+            <p class="rule-sub"><span class="badge">T1110</span> &nbsp;100200 fires on 6+ failed logons from one IP in 120s; 100201 fires if a success then follows from the same IP.</p>
+            <div class="code"><span class="tag">&lt;group</span> <span class="attr">name</span>=<span class="val">"windows,brute_force_success,"</span><span class="tag">&gt;</span>
+  <span class="tag">&lt;rule</span> <span class="attr">id</span>=<span class="val">"100200"</span> <span class="attr">level</span>=<span class="val">"10"</span> <span class="attr">frequency</span>=<span class="val">"6"</span> <span class="attr">timeframe</span>=<span class="val">"120"</span><span class="tag">&gt;</span>
+    <span class="tag">&lt;if_matched_sid&gt;</span><span class="txt">60122</span><span class="tag">&lt;/if_matched_sid&gt;</span>
+    <span class="tag">&lt;same_field&gt;</span><span class="txt">win.eventdata.ipAddress</span><span class="tag">&lt;/same_field&gt;</span>
+    <span class="tag">&lt;description&gt;</span><span class="txt">Multiple failed logons from same source (brute force in progress)</span><span class="tag">&lt;/description&gt;</span>
+    <span class="tag">&lt;mitre&gt;&lt;id&gt;</span><span class="txt">T1110</span><span class="tag">&lt;/id&gt;&lt;/mitre&gt;</span>
+  <span class="tag">&lt;/rule&gt;</span>
+  <span class="tag">&lt;rule</span> <span class="attr">id</span>=<span class="val">"100201"</span> <span class="attr">level</span>=<span class="val">"14"</span><span class="tag">&gt;</span>
+    <span class="tag">&lt;if_matched_sid&gt;</span><span class="txt">100200</span><span class="tag">&lt;/if_matched_sid&gt;</span>
+    <span class="tag">&lt;field</span> <span class="attr">name</span>=<span class="val">"win.system.eventID"</span><span class="tag">&gt;</span><span class="txt">^4624$</span><span class="tag">&lt;/field&gt;</span>
+    <span class="tag">&lt;same_field&gt;</span><span class="txt">win.eventdata.ipAddress</span><span class="tag">&lt;/same_field&gt;</span>
+    <span class="tag">&lt;description&gt;</span><span class="txt">Brute force SUCCEEDED: successful logon from an IP that just had multiple failures</span><span class="tag">&lt;/description&gt;</span>
+    <span class="tag">&lt;mitre&gt;&lt;id&gt;</span><span class="txt">T1110</span><span class="tag">&lt;/id&gt;&lt;/mitre&gt;</span>
+  <span class="tag">&lt;/rule&gt;</span>
+<span class="tag">&lt;/group&gt;</span></div>
+            <p class="validate">Validated with:<br><code class="inline-code">hydra -l UPCI -P /usr/share/wordlists/rockyou.txt rdp://10.0.30.40 -t 4</code></p>
+          </div>
+
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="container footer-inner">
+      <div class="fbrand">
+        <img class="monogram" src="assets/img/logo.svg" alt="TD monogram">
+        <p>Designed, built, and documented by <strong style="color:var(--text)">Tristen Dennis</strong></p>
+      </div>
+      <div class="social">
+        <a href="https://github.com/TristenDennis3" target="_blank" rel="noopener" aria-label="GitHub"><svg width="19" height="19" viewBox="0 0 24 24" fill="currentColor"><path d="M12 .5C5.7.5.5 5.7.5 12c0 5.1 3.3 9.4 7.9 10.9.6.1.8-.2.8-.6v-2c-3.2.7-3.9-1.4-3.9-1.4-.5-1.3-1.3-1.7-1.3-1.7-1.1-.7.1-.7.1-.7 1.2.1 1.8 1.2 1.8 1.2 1 1.8 2.7 1.3 3.4 1 .1-.8.4-1.3.7-1.6-2.6-.3-5.3-1.3-5.3-5.7 0-1.3.5-2.3 1.2-3.1-.1-.3-.5-1.5.1-3.1 0 0 1-.3 3.3 1.2a11.5 11.5 0 0 1 6 0C17 5.3 18 5.6 18 5.6c.6 1.6.2 2.8.1 3.1.7.8 1.2 1.8 1.2 3.1 0 4.4-2.7 5.4-5.3 5.7.4.4.8 1.1.8 2.2v3.3c0 .4.2.7.8.6 4.6-1.5 7.9-5.8 7.9-10.9C23.5 5.7 18.3.5 12 .5z"/></svg></a>
+        <a href="#" rel="noopener" aria-label="LinkedIn (link coming soon)" title="LinkedIn — link coming soon"><svg width="19" height="19" viewBox="0 0 24 24" fill="currentColor"><path d="M20.4 3H3.6A.6.6 0 0 0 3 3.6v16.8a.6.6 0 0 0 .6.6h16.8a.6.6 0 0 0 .6-.6V3.6a.6.6 0 0 0-.6-.6zM8.3 18.3H5.5V9.5h2.8v8.8zM6.9 8.3a1.6 1.6 0 1 1 0-3.2 1.6 1.6 0 0 1 0 3.2zm11.4 10h-2.8v-4.3c0-1 0-2.3-1.4-2.3s-1.6 1.1-1.6 2.3v4.4H9.7V9.5h2.7v1.2h.1c.4-.7 1.3-1.4 2.6-1.4 2.8 0 3.3 1.8 3.3 4.2v4.8z"/></svg></a>
+      </div>
+    </div>
+  </footer>
+
+  <script src="assets/js/main.js"></script>
+</body>
+</html>

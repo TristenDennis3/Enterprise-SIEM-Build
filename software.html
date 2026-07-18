@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Software Stack — SIEM SOC Lab</title>
+  <meta name="description" content="The full software stack: infrastructure, detection/SIEM sensors, and offensive tooling — with each tool's role in the lab.">
+  <meta name="author" content="Tristen Dennis">
+  <link rel="icon" type="image/svg+xml" href="assets/img/logo.svg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/css/styles.css">
+</head>
+<body>
+  <div class="bg-fixed"></div>
+  <canvas id="bg-canvas"></canvas>
+
+  <nav class="nav">
+    <div class="nav-inner">
+      <a class="brand" href="index.html" aria-label="SIEM SOC Lab — Home">
+        <img class="monogram" src="assets/img/logo.svg" alt="TD monogram">
+        <span class="brand-text"><span class="wordmark">SIEM SOC Lab</span><span class="sub">Security Operations Center</span></span>
+      </a>
+      <button class="nav-toggle" aria-label="Toggle menu" aria-expanded="false"><span></span><span></span><span></span></button>
+      <ul class="nav-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="diagram.html">Diagram</a></li>
+        <li><a href="hardware.html">Hardware</a></li>
+        <li><a href="software.html" class="active">Software</a></li>
+        <li><a href="attacks.html">Attacks &amp; Detections</a></li>
+        <li><a href="detection-rules.html">Detection Rules</a></li>
+        <li><a href="gallery.html">Gallery</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <main>
+    <section class="section">
+      <div class="container">
+        <div class="section-head">
+          <span class="eyebrow">The Stack</span>
+          <h2>Software</h2>
+          <p>Every platform and tool in the lab, grouped by function. Hover a row to highlight it.</p>
+        </div>
+
+        <div class="table-wrap reveal">
+          <div class="cat-label">Infrastructure</div>
+          <table class="soft">
+            <thead><tr><th style="width:220px;">Tool</th><th>Role in the lab</th></tr></thead>
+            <tbody>
+              <tr class="row"><td>pfSense+ WebGUI</td><td>Firewall rule management, VLAN configuration, DHCP, NAT, and VPN administration for the entire lab network.</td></tr>
+              <tr class="row"><td>UniFi Network Controller</td><td>Manages the UniFi switch ports, VLAN tagging, and the SPAN mirror port.</td></tr>
+              <tr class="row"><td>Proxmox</td><td>Hypervisor managing all VMs — deployment, snapshots, and resource allocation.</td></tr>
+              <tr class="row"><td>Linux VMs</td><td>Host vulnerable services and web apps (Metasploitable 3, DVWA) used as attack targets.</td></tr>
+              <tr class="row"><td>Active Directory</td><td>Windows Server 2022 domain controller (siemlab.local) — target for credential attacks, privilege escalation, and lateral movement.</td></tr>
+            </tbody>
+          </table>
+
+          <div class="cat-label">Detection / SIEM</div>
+          <table class="soft">
+            <thead><tr><th style="width:220px;">Tool</th><th>Role in the lab</th></tr></thead>
+            <tbody>
+              <tr class="row"><td>Security Onion</td><td>Network SOC platform capturing and analyzing mirrored SPAN traffic (Suricata + Zeek).</td></tr>
+              <tr class="row"><td>Suricata</td><td>Rule-based IDS/IPS analyzing mirrored traffic for known attack signatures and anomalies.</td></tr>
+              <tr class="row"><td>Zeek</td><td>Network security monitor generating rich connection and protocol logs from mirrored traffic.</td></tr>
+              <tr class="row"><td>Wazuh</td><td>Host-based EDR/HIDS with agents on every machine — catches local execution and suspicious activity.</td></tr>
+              <tr class="row"><td>Nessus</td><td>Scheduled vulnerability scanning of the victim network.</td></tr>
+            </tbody>
+          </table>
+
+          <div class="cat-label">Attack / Tooling</div>
+          <table class="soft">
+            <thead><tr><th style="width:220px;">Tool</th><th>Role in the lab</th></tr></thead>
+            <tbody>
+              <tr class="row"><td>Kali Linux</td><td>Offensive host in VLAN 40 — base for penetration testing (Metasploit, Impacket, Hydra, Wireshark).</td></tr>
+              <tr class="row"><td>MITRE Caldera</td><td>Automated adversary emulation — scripted attack chains that play the role of a threat actor.</td></tr>
+              <tr class="row"><td>Sliver C2</td><td>Post-exploitation command-and-control for beaconing and attacker-persistence practice.</td></tr>
+              <tr class="row"><td>Hydra</td><td>Credential brute-force testing (e.g., RDP) against victim hosts.</td></tr>
+              <tr class="row"><td>Wireshark</td><td>Packet capture and analysis for validating traffic and confirming detections.</td></tr>
+              <tr class="row"><td>Metasploitable 3</td><td>Intentionally vulnerable Linux host used for exploitation practice.</td></tr>
+              <tr class="row"><td>DVWA</td><td>Damn Vulnerable Web App for web-app testing — SQLi, XSS, and command injection (10.0.30.80).</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="container footer-inner">
+      <div class="fbrand">
+        <img class="monogram" src="assets/img/logo.svg" alt="TD monogram">
+        <p>Designed, built, and documented by <strong style="color:var(--text)">Tristen Dennis</strong></p>
+      </div>
+      <div class="social">
+        <a href="https://github.com/TristenDennis3" target="_blank" rel="noopener" aria-label="GitHub"><svg width="19" height="19" viewBox="0 0 24 24" fill="currentColor"><path d="M12 .5C5.7.5.5 5.7.5 12c0 5.1 3.3 9.4 7.9 10.9.6.1.8-.2.8-.6v-2c-3.2.7-3.9-1.4-3.9-1.4-.5-1.3-1.3-1.7-1.3-1.7-1.1-.7.1-.7.1-.7 1.2.1 1.8 1.2 1.8 1.2 1 1.8 2.7 1.3 3.4 1 .1-.8.4-1.3.7-1.6-2.6-.3-5.3-1.3-5.3-5.7 0-1.3.5-2.3 1.2-3.1-.1-.3-.5-1.5.1-3.1 0 0 1-.3 3.3 1.2a11.5 11.5 0 0 1 6 0C17 5.3 18 5.6 18 5.6c.6 1.6.2 2.8.1 3.1.7.8 1.2 1.8 1.2 3.1 0 4.4-2.7 5.4-5.3 5.7.4.4.8 1.1.8 2.2v3.3c0 .4.2.7.8.6 4.6-1.5 7.9-5.8 7.9-10.9C23.5 5.7 18.3.5 12 .5z"/></svg></a>
+        <a href="#" rel="noopener" aria-label="LinkedIn (link coming soon)" title="LinkedIn — link coming soon"><svg width="19" height="19" viewBox="0 0 24 24" fill="currentColor"><path d="M20.4 3H3.6A.6.6 0 0 0 3 3.6v16.8a.6.6 0 0 0 .6.6h16.8a.6.6 0 0 0 .6-.6V3.6a.6.6 0 0 0-.6-.6zM8.3 18.3H5.5V9.5h2.8v8.8zM6.9 8.3a1.6 1.6 0 1 1 0-3.2 1.6 1.6 0 0 1 0 3.2zm11.4 10h-2.8v-4.3c0-1 0-2.3-1.4-2.3s-1.6 1.1-1.6 2.3v4.4H9.7V9.5h2.7v1.2h.1c.4-.7 1.3-1.4 2.6-1.4 2.8 0 3.3 1.8 3.3 4.2v4.8z"/></svg></a>
+      </div>
+    </div>
+  </footer>
+
+  <script src="assets/js/main.js"></script>
+</body>
+</html>
