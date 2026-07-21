@@ -3,10 +3,10 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Network Diagram — Enterprise SIEM Network</title>
+  <title>Network Diagram · Enterprise SIEM Network</title>
   <meta name="description" content="The air-gapped, segmented network architecture: four isolated VLANs, inter-VLAN routing through pfSense, and a SPAN mirror feeding the SIEM.">
   <meta name="author" content="Tristen Dennis">
-  <meta property="og:title" content="Network Diagram — Enterprise SIEM Network">
+  <meta property="og:title" content="Network Diagram · Enterprise SIEM Network">
   <meta property="og:description" content="Four isolated VLANs routed through pfSense with a SPAN mirror into the SIEM.">
   <meta property="og:type" content="website">
   <link rel="icon" type="image/svg+xml" href="assets/img/logo.svg">
@@ -23,7 +23,7 @@
 
   <nav class="nav">
     <div class="nav-inner">
-      <a class="brand" href="index.html" aria-label="Enterprise SIEM Network — Home">
+      <a class="brand" href="index.html" aria-label="Enterprise SIEM Network Home">
         <img class="monogram" src="assets/img/logo.svg" alt="TD monogram">
         <span class="brand-text"><span class="wordmark">SIEM Network</span><span class="sub">Air-Gapped · Enterprise</span></span>
       </a>
@@ -33,7 +33,7 @@
         <li><a href="gallery.html">Gallery</a></li>
         <li><a href="diagram.html" class="active">Diagram</a></li>
         <li><a href="hardware.html">Hardware</a></li>
-        <li><a href="detection-rules.html">Detection Rules</a></li>
+        <li><a href="detection-rules.html">Detection &amp; Config</a></li>
         <li><a href="software.html">Software</a></li>
         <li><a href="attacks.html">Attacks</a></li>
         <li><a href="documentation.html">Docs</a></li>
@@ -47,7 +47,7 @@
         <div class="section-head">
           <span class="eyebrow">Architecture</span>
           <h2>Network Diagram</h2>
-          <p>Four isolated VLANs routed through a pfSense firewall, with a SPAN mirror copying every zone's traffic to the SIEM — fully air-gapped from the internet.</p>
+          <p>Four isolated VLANs routed through a pfSense firewall, with a SPAN mirror copying every zone's traffic to the SIEM, fully air-gapped from the internet.</p>
         </div>
 
         <div class="diagram-frame reveal" data-lightbox data-src="assets/img/network-diagram.png" data-cap="Enterprise SIEM Network — segmented architecture" style="max-width:900px;margin:0 auto;">
@@ -58,13 +58,12 @@
             <span style="font-size:0.85rem;">Add <code class="inline-code">assets/img/network-diagram.png</code> and it appears automatically.</span></div>
           </div>
         </div>
-        <p style="text-align:center;color:var(--text-muted);font-size:0.85rem;margin-top:12px;">Click the diagram to zoom.</p>
 
         <div class="vlan-legend reveal">
-          <div class="card vlan" style="--vc:#FBBF24;"><span class="vtag">VLAN 10</span><h4>Management</h4><p>Home base for administering the network. Only trusted admin interfaces — pfSense, UniFi Controller, Proxmox — live here.</p></div>
-          <div class="card vlan" style="--vc:#3B82F6;"><span class="vtag">VLAN 20</span><h4>SIEM Monitoring</h4><p>Security Onion, Wazuh, and Nessus. Receives mirrored traffic from every VLAN via the SPAN port — one-way visibility.</p></div>
+          <div class="card vlan" style="--vc:#FBBF24;"><span class="vtag">VLAN 10</span><h4>Management</h4><p>Home base for administering the network. Only trusted admin interfaces such as pfSense and the UniFi Controller.</p></div>
+          <div class="card vlan" style="--vc:#3B82F6;"><span class="vtag">VLAN 20</span><h4>SIEM Monitoring</h4><p>Security Onion, Wazuh, and Nessus. Receives mirrored traffic from every VLAN via the SPAN port for one-way visibility.</p></div>
           <div class="card vlan" style="--vc:#EF4444;"><span class="vtag">VLAN 30</span><h4>Victim Network</h4><p>Active Directory (DC01), Metasploitable, Windows 11, and DVWA. The targets for offensive testing and log generation.</p></div>
-          <div class="card vlan" style="--vc:#22C55E;"><span class="vtag">VLAN 40</span><h4>Attack Network</h4><p>Kali Linux offensive host. Isolated, no internet — its only job is generating realistic attack traffic for the SIEM to catch.</p></div>
+          <div class="card vlan" style="--vc:#22C55E;"><span class="vtag">VLAN 40</span><h4>Attack Network</h4><p>Kali Linux offensive host. Its only job is generating realistic attack traffic for the SIEM to catch.</p></div>
         </div>
       </div>
     </section>

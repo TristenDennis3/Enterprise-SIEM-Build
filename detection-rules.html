@@ -3,11 +3,11 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Detection Rules — Enterprise SIEM Network</title>
-  <meta name="description" content="Custom detection rules and infrastructure scripts I wrote and validated across the air-gapped SIEM Network.">
+  <title>Detection &amp; Config · Enterprise SIEM Network</title>
+  <meta name="description" content="Custom detection rules and the intentional configuration work behind them across the air-gapped Enterprise SIEM Network.">
   <meta name="author" content="Tristen Dennis">
-  <meta property="og:title" content="Detection Rules — Enterprise SIEM Network">
-  <meta property="og:description" content="Custom Wazuh rules and the SPAN-flood script, written and validated.">
+  <meta property="og:title" content="Detection &amp; Config · Enterprise SIEM Network">
+  <meta property="og:description" content="Custom Wazuh rules, the SPAN-flood script, and the environment configuration behind the detections.">
   <meta property="og:type" content="website">
   <link rel="icon" type="image/svg+xml" href="assets/img/logo.svg">
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -23,7 +23,7 @@
 
   <nav class="nav">
     <div class="nav-inner">
-      <a class="brand" href="index.html" aria-label="Enterprise SIEM Network — Home">
+      <a class="brand" href="index.html" aria-label="Enterprise SIEM Network Home">
         <img class="monogram" src="assets/img/logo.svg" alt="TD monogram">
         <span class="brand-text"><span class="wordmark">SIEM Network</span><span class="sub">Air-Gapped · Enterprise</span></span>
       </a>
@@ -33,7 +33,7 @@
         <li><a href="gallery.html">Gallery</a></li>
         <li><a href="diagram.html">Diagram</a></li>
         <li><a href="hardware.html">Hardware</a></li>
-        <li><a href="detection-rules.html" class="active">Detection Rules</a></li>
+        <li><a href="detection-rules.html" class="active">Detection &amp; Config</a></li>
         <li><a href="software.html">Software</a></li>
         <li><a href="attacks.html">Attacks</a></li>
         <li><a href="documentation.html">Docs</a></li>
@@ -46,19 +46,16 @@
       <div class="container">
         <div class="section-head">
           <span class="eyebrow">Detection Engineering</span>
-          <h2>Detection Rules</h2>
-          <p>Custom rules I wrote and validated by running the matching attack. Deployed to Wazuh at <code class="inline-code">/var/ossec/etc/rules/local_rules.xml</code>.</p>
+          <h2>Detection &amp; Configuration</h2>
+          <p>The custom detection rules I wrote and validated, plus the intentional configuration work across the environment that makes those detections possible. Rules deploy to Wazuh at <code class="inline-code">/var/ossec/etc/rules/local_rules.xml</code>.</p>
         </div>
 
-        <!-- Featured bash script -->
-        <div class="script-feature reveal" style="max-width:880px;margin:0 auto var(--s-6);">
-          <div class="script-bar"><span class="tdot r"></span><span class="tdot y"></span><span class="tdot g"></span><span class="fname">span-flood.sh — forces the SPAN bridge to flood all traffic to Security Onion</span></div>
-          <pre><span class="ln cmt" style="animation-delay:.03s">#!/bin/bash</span><span class="ln cmt" style="animation-delay:.08s"># span-flood.sh - force SPAN bridge port to flood all traffic to Security Onion</span><span class="ln cmt" style="animation-delay:.13s"># Run at boot; setting does not persist across reboots.</span><span class="ln" style="animation-delay:.18s">&nbsp;</span><span class="ln" style="animation-delay:.23s"><span class="fn">ip</span> link set enp6s0f0 promisc <span class="kw">on</span></span><span class="ln" style="animation-delay:.28s"><span class="fn">bridge</span> link set dev enp6s0f0 flood <span class="kw">on</span></span><span class="ln" style="animation-delay:.33s"><span class="fn">bridge</span> link set dev enp6s0f0 learning <span class="kw">off</span></span><span class="ln" style="animation-delay:.38s"><span class="fn">bridge</span> link set dev enp6s0f0 mcast_flood <span class="kw">on</span></span><span class="ln" style="animation-delay:.43s">&nbsp;</span><span class="ln" style="animation-delay:.48s"><span class="fn">echo</span> <span class="str">"SPAN flood enabled on enp6s0f0"</span></span><span class="ln" style="animation-delay:.53s"><span class="fn">bridge</span> -d link show dev enp6s0f0</span></pre>
-        </div>
+        <!-- ============ SECTION 1: RULES ============ -->
+        <div class="subsec-title">Custom Detection Rules</div>
 
         <div class="rules">
           <div class="card rule reveal" style="--accent:#8B5CF6;--accent-glow:rgba(139,92,246,0.42);">
-            <div class="rule-head"><h3>Rule 100150 — Kerberoasting Detection</h3><span class="pill ok">Validated</span></div>
+            <div class="rule-head"><h3>Rule 100150: Kerberoasting Detection</h3><span class="pill ok">Validated</span></div>
             <p class="rule-sub"><span class="badge">T1558.003</span> &nbsp;Fires on Event 4769 with RC4 encryption (0x17).</p>
             <div class="code"><span class="tag">&lt;group</span> <span class="attr">name</span>=<span class="val">"windows,kerberoasting,"</span><span class="tag">&gt;</span>
   <span class="tag">&lt;rule</span> <span class="attr">id</span>=<span class="val">"100150"</span> <span class="attr">level</span>=<span class="val">"12"</span><span class="tag">&gt;</span>
@@ -74,8 +71,8 @@
           </div>
 
           <div class="card rule reveal" style="--accent:#3B82F6;--accent-glow:rgba(59,130,246,0.42);">
-            <div class="rule-head"><h3>Rule 100160 — Noise Suppression</h3><span class="pill ok">Validated</span></div>
-            <p class="rule-sub">Silences benign DC01$ machine-account logon noise (level 0) to cut alert fatigue while keeping real logons alerting.</p>
+            <div class="rule-head"><h3>Rule 100160: Noise Suppression</h3><span class="pill ok">Validated</span></div>
+            <p class="rule-sub">Silences benign DC01$ machine-account logon noise (level 0) to cut alert fatigue while keeping genuine logons alerting.</p>
             <div class="code"><span class="tag">&lt;group</span> <span class="attr">name</span>=<span class="val">"windows,noise_reduction,"</span><span class="tag">&gt;</span>
   <span class="tag">&lt;rule</span> <span class="attr">id</span>=<span class="val">"100160"</span> <span class="attr">level</span>=<span class="val">"0"</span><span class="tag">&gt;</span>
     <span class="tag">&lt;if_sid&gt;</span><span class="txt">60106</span><span class="tag">&lt;/if_sid&gt;</span>
@@ -87,7 +84,7 @@
           </div>
 
           <div class="card rule reveal" style="--accent:#D946EF;--accent-glow:rgba(217,70,239,0.42);">
-            <div class="rule-head"><h3>Rule 100170 — Auth From Attack Subnet</h3><span class="pill ok">Validated</span></div>
+            <div class="rule-head"><h3>Rule 100170: Auth From Attack Subnet</h3><span class="pill ok">Validated</span></div>
             <p class="rule-sub"><span class="badge">T1078</span> &nbsp;Fires on any authentication sourced from the attack VLAN (10.0.40.0/24).</p>
             <div class="code"><span class="tag">&lt;group</span> <span class="attr">name</span>=<span class="val">"windows,attack_subnet,"</span><span class="tag">&gt;</span>
   <span class="tag">&lt;rule</span> <span class="attr">id</span>=<span class="val">"100170"</span> <span class="attr">level</span>=<span class="val">"12"</span><span class="tag">&gt;</span>
@@ -101,7 +98,7 @@
           </div>
 
           <div class="card rule reveal" style="--accent:#22D3EE;--accent-glow:rgba(34,211,238,0.42);">
-            <div class="rule-head"><h3>Rules 100200 / 100201 — Brute Force + Success Correlation</h3><span style="display:flex;gap:6px;flex-wrap:wrap;"><span class="pill ok">100200 Validated</span><span class="pill pending">100201 Pending</span></span></div>
+            <div class="rule-head"><h3>Rules 100200 / 100201: Brute Force + Success Correlation</h3><span style="display:flex;gap:6px;flex-wrap:wrap;"><span class="pill ok">100200 Validated</span><span class="pill pending">100201 Pending</span></span></div>
             <p class="rule-sub"><span class="badge">T1110</span> &nbsp;100200 fires on 6+ failed logons from one IP in 120s; 100201 fires if a success then follows from the same IP.</p>
             <div class="code"><span class="tag">&lt;group</span> <span class="attr">name</span>=<span class="val">"windows,brute_force_success,"</span><span class="tag">&gt;</span>
   <span class="tag">&lt;rule</span> <span class="attr">id</span>=<span class="val">"100200"</span> <span class="attr">level</span>=<span class="val">"10"</span> <span class="attr">frequency</span>=<span class="val">"6"</span> <span class="attr">timeframe</span>=<span class="val">"120"</span><span class="tag">&gt;</span>
@@ -121,6 +118,96 @@
             <p class="validate">Validated with:<br><code class="inline-code">hydra -l UPCI -P /usr/share/wordlists/rockyou.txt rdp://10.0.30.40 -t 4</code></p>
           </div>
         </div>
+
+        <!-- ============ SECTION 2: CONFIGURATION ============ -->
+        <div class="subsec-title" style="margin-top:var(--s-6);">Configuration Edits</div>
+        <p style="color:var(--text-muted);max-width:760px;margin:0 0 var(--s-4);">Not just detection rules. This is the environment work behind them: the bridges, addressing, sensor interfaces, and Windows audit tuning that generate and deliver the right telemetry to the SIEM.</p>
+
+        <!-- Proxmox -->
+        <div class="cat-label">Proxmox · Virtualization Host</div>
+        <div class="cfg-stack">
+          <div class="card rule reveal" style="--accent:#F97316;--accent-glow:rgba(249,115,22,0.42);">
+            <div class="rule-head"><h3>SPAN Flood Script</h3><span class="pill ok">Validated</span></div>
+            <p class="rule-sub">A bash script that dynamically finds every port on the SPAN bridge (vmbr2) and forces it into flood mode with learning disabled, so all mirrored traffic reaches Security Onion. Run at boot, since bridge settings do not persist.</p>
+            <div class="code"><span class="cmt">#!/bin/bash</span>
+<span class="cmt"># Apply SPAN flood settings to all ports on vmbr2 (SPAN bridge)</span>
+<span class="kw">for</span> IFACE <span class="kw">in</span> $(bridge link | grep <span class="str">"master vmbr2"</span> | awk -F: '{print $2}' | awk '{print $1}'); <span class="kw">do</span>
+    <span class="fn">bridge</span> link set dev <span class="str">"$IFACE"</span> flood <span class="kw">on</span>
+    <span class="fn">bridge</span> link set dev <span class="str">"$IFACE"</span> learning <span class="kw">off</span>
+    <span class="fn">bridge</span> link set dev <span class="str">"$IFACE"</span> mcast_flood <span class="kw">on</span>
+<span class="kw">done</span></div>
+          </div>
+
+          <div class="card rule reveal" style="--accent:#F97316;--accent-glow:rgba(249,115,22,0.42);">
+            <div class="rule-head"><h3>Bridge Architecture</h3></div>
+            <p class="rule-sub">Purpose-separated Linux bridges on the Proxmox host: vmbr1 for management (10.0.10.5/24), vmbr2 as the SPAN input from the mirror port, and vmbr3 as dedicated Security Onion management. Each bridge isolates a specific traffic role.</p>
+            <div class="code">auto vmbr1              <span class="cmt"># management</span>
+iface vmbr1 inet static
+    address 10.0.10.5/24
+    gateway 10.0.10.1
+
+auto vmbr2              <span class="cmt"># SPAN input from mirror port</span>
+iface vmbr2 inet manual
+    bridge-ports enp6s0f0
+
+auto vmbr3              <span class="cmt"># dedicated SO mgmt</span>
+iface vmbr3 inet manual
+    bridge-ports enp6s0f1</div>
+          </div>
+
+          <div class="card rule reveal" style="--accent:#F97316;--accent-glow:rgba(249,115,22,0.42);">
+            <div class="rule-head"><h3>Static IP Addressing Scheme</h3></div>
+            <p class="rule-sub">A segmented static addressing scheme designed and configured across four VLANs, applied to every endpoint so the environment is predictable and fully documented.</p>
+            <div class="table-wrap" style="margin-top:var(--s-2);">
+              <table class="soft"><thead><tr><th style="width:110px;">VLAN</th><th>Purpose / Subnet</th><th>Key Hosts</th></tr></thead><tbody>
+                <tr class="row"><td>VLAN 10</td><td>Management · 10.0.10.0/24</td><td>Proxmox (.5)</td></tr>
+                <tr class="row"><td>VLAN 20</td><td>SIEM · 10.0.20.0/24</td><td>Security Onion (.10), Wazuh (.20), Nessus (.30)</td></tr>
+                <tr class="row"><td>VLAN 30</td><td>Victim · 10.0.30.0/24</td><td>DC01 (.10), Metasploitable (.30), Win11 (.40), DVWA (.80)</td></tr>
+                <tr class="row"><td>VLAN 40</td><td>Attack · 10.0.40.0/24</td><td>Kali Linux (.200)</td></tr>
+              </tbody></table>
+            </div>
+          </div>
+        </div>
+
+        <!-- Security Onion -->
+        <div class="cat-label" style="margin-top:var(--s-4);">Security Onion · Network Sensor</div>
+        <div class="cfg-stack">
+          <div class="card rule reveal" style="--accent:#3B82F6;--accent-glow:rgba(59,130,246,0.42);">
+            <div class="rule-head"><h3>Monitoring &amp; Management Interfaces</h3></div>
+            <p class="rule-sub">The management interface (ens18) is set to a static IP on the SIEM VLAN, while the monitoring interface (ens19) is configured with autoconnect off so it passively sniffs mirrored traffic rather than carrying an address.</p>
+            <div class="code"><span class="cmt"># ens18 - management</span>
+address1=10.0.20.10/24
+gateway=10.0.20.1
+method=manual
+
+<span class="cmt"># ens19 - monitoring (passive)</span>
+autoconnect=false
+method=auto</div>
+          </div>
+        </div>
+
+        <!-- Active Directory -->
+        <div class="cat-label" style="margin-top:var(--s-4);">Active Directory · DC01</div>
+        <div class="cfg-stack">
+          <div class="card rule reveal" style="--accent:#EF4444;--accent-glow:rgba(239,68,68,0.42);">
+            <div class="rule-head"><h3>Audit Policy for Detection</h3></div>
+            <p class="rule-sub">Enabled the specific audit categories that generate the events the detection rules rely on, so attacks surface as security events. Key categories: Kerberos Service Ticket Operations, Logon/Logoff, Credential Validation, and Account Management.</p>
+          </div>
+
+          <div class="card rule reveal" style="--accent:#EF4444;--accent-glow:rgba(239,68,68,0.42);">
+            <div class="rule-head"><h3>Wazuh Agent Event-Channel Tuning</h3></div>
+            <p class="rule-sub">Curated which Windows events forward to the manager rather than shipping everything: a Security channel filtered to the detection-relevant Event IDs, a Sysmon channel, and a noise-exclusion query that drops high-volume events. This keeps the pipeline focused on what matters.</p>
+            <div class="code"><span class="tag">&lt;query&gt;</span>Event/System[EventID=4662 or EventID=4625 or
+ EventID=4624 or EventID=4768 or EventID=4769 or
+ EventID=4776 or EventID=1102]<span class="tag">&lt;/query&gt;</span></div>
+          </div>
+
+          <div class="card rule reveal" style="--accent:#EF4444;--accent-glow:rgba(239,68,68,0.42);">
+            <div class="rule-head"><h3>Service Accounts as Attack Surface</h3></div>
+            <p class="rule-sub">Created domain service accounts with registered SPNs (MSSQL service principals) so the environment presents realistic, crackable service tickets for Kerberoasting to target.</p>
+          </div>
+        </div>
+
       </div>
     </section>
   </main>

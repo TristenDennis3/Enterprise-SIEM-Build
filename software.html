@@ -3,10 +3,10 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Software Stack — Enterprise SIEM Network</title>
+  <title>Software Stack · Enterprise SIEM Network</title>
   <meta name="description" content="The full software stack of the air-gapped SIEM Network: infrastructure, detection/SIEM sensors, and offensive tooling.">
   <meta name="author" content="Tristen Dennis">
-  <meta property="og:title" content="Software Stack — Enterprise SIEM Network">
+  <meta property="og:title" content="Software Stack · Enterprise SIEM Network">
   <meta property="og:description" content="Infrastructure, detection/SIEM sensors, and offensive tooling.">
   <meta property="og:type" content="website">
   <link rel="icon" type="image/svg+xml" href="assets/img/logo.svg">
@@ -23,7 +23,7 @@
 
   <nav class="nav">
     <div class="nav-inner">
-      <a class="brand" href="index.html" aria-label="Enterprise SIEM Network — Home">
+      <a class="brand" href="index.html" aria-label="Enterprise SIEM Network Home">
         <img class="monogram" src="assets/img/logo.svg" alt="TD monogram">
         <span class="brand-text"><span class="wordmark">SIEM Network</span><span class="sub">Air-Gapped · Enterprise</span></span>
       </a>
@@ -33,7 +33,7 @@
         <li><a href="gallery.html">Gallery</a></li>
         <li><a href="diagram.html">Diagram</a></li>
         <li><a href="hardware.html">Hardware</a></li>
-        <li><a href="detection-rules.html">Detection Rules</a></li>
+        <li><a href="detection-rules.html">Detection &amp; Config</a></li>
         <li><a href="software.html" class="active">Software</a></li>
         <li><a href="attacks.html">Attacks</a></li>
         <li><a href="documentation.html">Docs</a></li>
@@ -53,11 +53,11 @@
         <div class="table-wrap reveal">
           <div class="cat-label">Infrastructure</div>
           <table class="soft"><thead><tr><th style="width:220px;">Tool</th><th>Role in the network</th></tr></thead><tbody>
-            <tr class="row"><td>pfSense+ WebGUI</td><td>Firewall rule management, VLAN configuration, DHCP, NAT, and VPN administration for the entire network.</td></tr>
+            <tr class="row"><td>pfSense+ WebGUI</td><td>Used to create firewall rules and view logs of network traffic. All traffic passes through here.</td></tr>
             <tr class="row"><td>UniFi Network Controller</td><td>Manages the UniFi switch ports, VLAN tagging, and the SPAN mirror port.</td></tr>
-            <tr class="row"><td>Proxmox</td><td>Hypervisor managing all VMs — deployment, snapshots, and resource allocation.</td></tr>
+            <tr class="row"><td>Proxmox</td><td>Hypervisor managing all VMs: deployment, snapshots, and resource allocation.</td></tr>
             <tr class="row"><td>Linux VMs</td><td>Host vulnerable services and web apps (Metasploitable 3, DVWA) used as attack targets.</td></tr>
-            <tr class="row"><td>Active Directory</td><td>Windows Server 2022 domain controller (siemlab.local) — target for credential attacks, privilege escalation, and lateral movement.</td></tr>
+            <tr class="row"><td>Active Directory</td><td>Windows Server 2022 domain controller (siemlab.local). The target for credential attacks, privilege escalation, and lateral movement.</td></tr>
           </tbody></table>
 
           <div class="cat-label">Detection / SIEM</div>
@@ -65,19 +65,19 @@
             <tr class="row"><td>Security Onion</td><td>Network SIEM platform capturing and analyzing mirrored SPAN traffic (Suricata + Zeek).</td></tr>
             <tr class="row"><td>Suricata</td><td>Rule-based IDS/IPS analyzing mirrored traffic for known attack signatures and anomalies.</td></tr>
             <tr class="row"><td>Zeek</td><td>Network security monitor generating rich connection and protocol logs from mirrored traffic.</td></tr>
-            <tr class="row"><td>Wazuh</td><td>Host-based EDR/HIDS with agents on every machine — catches local execution and suspicious activity.</td></tr>
-            <tr class="row"><td>Nessus</td><td>Scheduled vulnerability scanning of the victim network.</td></tr>
+            <tr class="row"><td>Wazuh</td><td>Host-based EDR/HIDS with agents on every machine that catch local execution and suspicious activity.</td></tr>
+            <tr class="row"><td>Nessus</td><td>Vulnerability scanning of network and endpoints.</td></tr>
           </tbody></table>
 
           <div class="cat-label">Attack / Tooling</div>
           <table class="soft"><thead><tr><th style="width:220px;">Tool</th><th>Role in the network</th></tr></thead><tbody>
-            <tr class="row"><td>Kali Linux</td><td>Offensive host in VLAN 40 — base for penetration testing (Metasploit, Impacket, Hydra, Wireshark).</td></tr>
-            <tr class="row"><td>MITRE Caldera</td><td>Automated adversary emulation — scripted attack chains that play the role of a threat actor.</td></tr>
+            <tr class="row"><td>Kali Linux</td><td>Offensive host in VLAN 40. Base for penetration testing (Metasploit, Impacket, Hydra, Wireshark).</td></tr>
+            <tr class="row"><td>MITRE Caldera</td><td>Automated adversary emulation with scripted attack chains that play the role of a threat actor.</td></tr>
             <tr class="row"><td>Sliver C2</td><td>Post-exploitation command-and-control for beaconing and attacker-persistence practice.</td></tr>
             <tr class="row"><td>Hydra</td><td>Credential brute-force testing (e.g., RDP) against victim hosts.</td></tr>
             <tr class="row"><td>Wireshark</td><td>Packet capture and analysis for validating traffic and confirming detections.</td></tr>
             <tr class="row"><td>Metasploitable 3</td><td>Intentionally vulnerable Linux host used for exploitation practice.</td></tr>
-            <tr class="row"><td>DVWA</td><td>Damn Vulnerable Web App for web-app testing — SQLi, XSS, and command injection (10.0.30.80).</td></tr>
+            <tr class="row"><td>DVWA</td><td>Damn Vulnerable Web App for web-app testing: SQLi, XSS, and command injection.</td></tr>
           </tbody></table>
         </div>
       </div>
