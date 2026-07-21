@@ -74,7 +74,10 @@ img { max-width: 100%; display: block; }
   position: fixed; inset: 0; z-index: -4;
   background:
     linear-gradient(180deg, rgba(8,6,16,0.58) 0%, rgba(8,6,16,0.80) 52%, rgba(8,6,16,0.90) 100%),
-    url("../img/site-bg.jpg") center center / cover no-repeat;
+    url("../img/site-bg.jpg") center center / cover no-repeat,
+    radial-gradient(1100px 850px at 72% 18%, rgba(217,70,239,0.22), transparent 60%),
+    radial-gradient(950px 750px at 18% 85%, rgba(139,92,246,0.20), transparent 60%),
+    #0a0710;
 }
 /* Subtle drifting glow over the image for a touch of life */
 #bg-layer { position: fixed; inset: 0; z-index: -3; pointer-events: none; overflow: hidden;
@@ -126,17 +129,17 @@ main { padding-top: var(--nav-h); }
 .section-head h2 { font-size: clamp(1.7rem, 3.6vw, 2.5rem); }
 .section-head p { color: var(--text-muted); font-size: 1.02rem; }
 /* Colorful gradient titles everywhere */
-.grad-text, .section-head h2 {
-  background: var(--grad-text);
-  -webkit-background-clip: text; background-clip: text;
-  -webkit-text-fill-color: transparent; color: transparent;
-}
+/* Solid bright header color — guaranteed visible on every browser (no fragile in-text gradient) */
+.grad-text, .section-head h2 { color: #EA8AF0; text-shadow: 0 0 26px rgba(217,70,239,0.30); }
 
 /* Big two-line hero title: solid gradient line + neon outline line */
 .hero .hero-title { font-family: var(--f-head); font-weight: 700; text-transform: uppercase; line-height: 0.92; letter-spacing: -0.01em; max-width: none; margin-bottom: var(--s-3); }
 .hero .hero-title .line-solid, .hero .hero-title .line-outline { display: block; font-size: clamp(2.6rem, 8.6vw, 6.4rem); }
-.hero .hero-title .line-solid { background: var(--grad-text); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; color: transparent; filter: drop-shadow(0 0 26px rgba(236,72,153,0.32)); }
-.hero .hero-title .line-outline { color: transparent; -webkit-text-fill-color: transparent; -webkit-text-stroke: 1.7px var(--pink); filter: drop-shadow(0 0 16px rgba(217,70,239,0.5)); }
+.hero .hero-title .line-solid { color: #F2B5FF; filter: drop-shadow(0 0 26px rgba(236,72,153,0.4)); }
+.hero .hero-title .line-outline { color: var(--pink); -webkit-text-fill-color: transparent; -webkit-text-stroke: 1.7px var(--pink); filter: drop-shadow(0 0 16px rgba(217,70,239,0.5)); }
+@supports not ((-webkit-text-stroke: 1px) or (text-stroke: 1px)) {
+  .hero .hero-title .line-outline { -webkit-text-fill-color: var(--pink); color: var(--pink); }
+}
 
 /* ---------- Navigation ---------- */
 .nav {

@@ -121,14 +121,14 @@
 
         <!-- ============ SECTION 2: CONFIGURATION ============ -->
         <div class="subsec-title" style="margin-top:var(--s-6);">Configuration Edits</div>
-        <p style="color:var(--text-muted);max-width:760px;margin:0 0 var(--s-4);">Not just detection rules. This is the environment work behind them: the bridges, addressing, sensor interfaces, and Windows audit tuning that generate and deliver the right telemetry to the SIEM.</p>
+        <p style="color:var(--text-muted);max-width:760px;margin:0 0 var(--s-4);">The environment configuration that generates and delivers the right telemetry to the SIEM: bridges, addressing, sensor interfaces, and Windows audit tuning.</p>
 
         <!-- Proxmox -->
         <div class="cat-label">Proxmox · Virtualization Host</div>
         <div class="cfg-stack">
           <div class="card rule reveal" style="--accent:#F97316;--accent-glow:rgba(249,115,22,0.42);">
             <div class="rule-head"><h3>SPAN Flood Script</h3><span class="pill ok">Validated</span></div>
-            <p class="rule-sub">A bash script that dynamically finds every port on the SPAN bridge (vmbr2) and forces it into flood mode with learning disabled, so all mirrored traffic reaches Security Onion. Run at boot, since bridge settings do not persist.</p>
+            <p class="rule-sub">A bash script that dynamically finds every port on the SPAN bridge (vmbr2) and forces it into flood mode with learning disabled, so all mirrored traffic reaches Security Onion.</p>
             <div class="code"><span class="cmt">#!/bin/bash</span>
 <span class="cmt"># Apply SPAN flood settings to all ports on vmbr2 (SPAN bridge)</span>
 <span class="kw">for</span> IFACE <span class="kw">in</span> $(bridge link | grep <span class="str">"master vmbr2"</span> | awk -F: '{print $2}' | awk '{print $1}'); <span class="kw">do</span>
@@ -140,7 +140,7 @@
 
           <div class="card rule reveal" style="--accent:#F97316;--accent-glow:rgba(249,115,22,0.42);">
             <div class="rule-head"><h3>Bridge Architecture</h3></div>
-            <p class="rule-sub">Purpose-separated Linux bridges on the Proxmox host: vmbr1 for management (10.0.10.5/24), vmbr2 as the SPAN input from the mirror port, and vmbr3 as dedicated Security Onion management. Each bridge isolates a specific traffic role.</p>
+            <p class="rule-sub">Purpose-separated Linux bridges on the Proxmox host: vmbr1 for management (10.0.10.5/24), vmbr2 as the SPAN input from the mirror port, and vmbr3 as dedicated Security Onion management.</p>
             <div class="code">auto vmbr1              <span class="cmt"># management</span>
 iface vmbr1 inet static
     address 10.0.10.5/24
