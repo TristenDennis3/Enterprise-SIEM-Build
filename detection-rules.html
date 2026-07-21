@@ -50,6 +50,20 @@
           <p>The custom detection rules I wrote and validated, plus the intentional configuration work across the environment that makes those detections possible. Rules deploy to Wazuh at <code class="inline-code">/var/ossec/etc/rules/local_rules.xml</code>.</p>
         </div>
 
+        <!-- MITRE ATT&CK bar chart (attention piece) -->
+        <div class="subsec-title" style="margin-bottom:var(--s-3);">ATT&amp;CK Tactic Coverage</div>
+        <div class="card reveal" style="max-width:860px;margin:0 auto var(--s-5);">
+          <div class="chart">
+            <div class="chart-row" style="--c:#E11D48;--c2:#FB7185;"><div class="lbl">Credential Access</div><div><div class="chart-track"><div class="chart-fill" data-pct="100"><span class="val">3 detected</span></div></div><div class="ids">T1558.003 &middot; T1003.006 &middot; T1110</div></div></div>
+            <div class="chart-row" style="--c:#EA580C;--c2:#FB923C;"><div class="lbl">Lateral Movement</div><div><div class="chart-track"><div class="chart-fill" data-pct="67"><span class="val">2 detected</span></div></div><div class="ids">T1550.002 &middot; T1210</div></div></div>
+            <div class="chart-row" style="--c:#CA8A04;--c2:#FACC15;"><div class="lbl">Execution</div><div><div class="chart-track"><div class="chart-fill" data-pct="67"><span class="val">2 detected</span></div></div><div class="ids">T1059.007 (XSS) &middot; T1059 (Cmd Injection)</div></div></div>
+            <div class="chart-row" style="--c:#059669;--c2:#34D399;"><div class="lbl">Discovery</div><div><div class="chart-track"><div class="chart-fill" data-pct="33"><span class="val">1 detected</span></div></div><div class="ids">T1046</div></div></div>
+            <div class="chart-row" style="--c:#0284C7;--c2:#38BDF8;"><div class="lbl">Initial Access</div><div><div class="chart-track"><div class="chart-fill" data-pct="33"><span class="val">1 detected</span></div></div><div class="ids">T1190</div></div></div>
+            <div class="chart-row" style="--c:#7C3AED;--c2:#A78BFA;"><div class="lbl">Command &amp; Control</div><div><div class="chart-track"><div class="chart-fill" data-pct="33"><span class="val">1 detected</span></div></div><div class="ids">T1071</div></div></div>
+          </div>
+          <p class="chart-note">Attacks detected per ATT&amp;CK tactic &middot; full commands &amp; sensors on the Attacks page.</p>
+        </div>
+
         <!-- ============ SECTION 1: RULES ============ -->
         <div class="subsec-title">Custom Detection Rules</div>
 
