@@ -1,73 +1,37 @@
 # Enterprise SIEM Network
 
-A fully segmented, **air-gapped Security Information and Event Management (SIEM) network**
-built to emulate adversary activity and detect it across both network and host sensors.
-Four isolated VLANs, dual SIEM platforms, live attack simulation, and custom detection
-engineering, documented end to end.
+A fully segmented, air-gapped Security Information and Event Management (SIEM) lab — designed, built, and documented from the ground up. Four isolated VLANs, dual SIEM platforms, live adversary emulation, and custom detection engineering.
 
-Completed as an independent study and internship.
+**Live site:** https://tristendennis3.github.io/Enterprise-SIEM-Build/
 
-**Designed, built, and documented by Tristen Dennis.**
-🔗 Live site: https://tristendennis3.github.io/Enterprise-SIEM-Build/
+## Overview
 
----
+This project is a working model of an enterprise Security Operations Center. It simulates attacks against a segmented network and detects them across both network and host sensors. It doubles as a hands-on learning resource for cybersecurity students.
 
-## What this is
+## What's inside
 
-A working model of an enterprise detection environment, run entirely air-gapped from the
-internet. Attacks are launched from a dedicated offensive VLAN against a victim network, and
-every action is caught by a layered detection stack: the **network sensor** sees delivery and
-traffic, while the **host sensor** sees local execution.
+- **Segmented network** — four isolated VLANs (management, SIEM, victim, attack) enforced at the firewall and switch level, with a SPAN mirror feeding the SIEM.
+- **Dual SIEM platforms** — Security Onion (network detection via Suricata and Zeek) and Wazuh (host detection via agents), for layered coverage.
+- **Vulnerability management** — credentialed and non-credentialed Nessus scans with CVSS-based prioritization.
+- **Adversary emulation** — MITRE Caldera and manual attacks (impacket, Hydra, Metasploit) against an Active Directory domain and vulnerable hosts.
+- **Custom detection engineering** — custom Wazuh rules written and validated by running the matching attack.
 
-## Network architecture
+## Attacks and detections
 
-| VLAN | Zone | Contents |
-|------|------|----------|
-| **10** | Management | pfSense, UniFi Controller, Proxmox (trusted admin interfaces only) |
-| **20** | SIEM Monitoring | Security Onion, Wazuh, Nessus (receives mirrored SPAN traffic, one-way) |
-| **30** | Victim Network | Active Directory (DC01), Metasploitable 3, Windows 11, DVWA |
-| **40** | Attack Network | Kali Linux offensive host |
+Ten attacks executed and detected, mapped to MITRE ATT&CK — including Kerberoasting, DCSync, pass-the-hash, SQL injection, XSS, command injection, RDP brute force, and a ProFTPD exploit. Each attack is documented with the exact command, target, and the sensor that caught it. See the Attacks page on the live site.
 
-Inter-VLAN routing and firewall policy run on a Netgate 2100 (pfSense+). A UniFi
-USW-Pro-Max-16-PoE Layer 3 switch handles VLAN tagging and a SPAN mirror port that copies
-every VLAN's traffic to Security Onion.
+## Custom detection rules
 
-## Detection stack
+Custom Wazuh rules including Kerberoasting detection (RC4 service tickets), attack-subnet authentication, machine-account noise suppression, and brute-force correlation. Each rule is documented with its config and validation. See the Detection Rules page.
 
-- **Security Onion**: network SIEM (Suricata + Zeek) analyzing mirrored SPAN traffic
-- **Wazuh**: host-based EDR/HIDS with agents on every machine
-- **Nessus**: vulnerability scanning of network and endpoints
-- **Custom Wazuh rules**: Kerberoasting, noise suppression, attack-subnet authentication,
-  and brute-force + success correlation, each validated by running the matching attack
-- **SPAN-flood script**: forces the bridge port to flood all traffic to the sensor
+## Tech stack
 
-## Attacks emulated & detected
-
-Ten attacks mapped to MITRE ATT&CK, spanning Discovery, Initial Access, Execution,
-Credential Access, Lateral Movement, and Command & Control, including Kerberoasting,
-DCSync, Pass-the-Hash, SQL injection, XSS, command injection, Hydra RDP brute force, a
-ProFTPD exploit, and Sliver C2 implant delivery.
-
-## Hardware
-
-Netgate 2100 firewall · UniFi USW-Pro-Max-16-PoE L3 switch · Ryzen Proxmox host
-(RTX 5070, 32 GB, 2 TB) · Lenovo Legion 7i · CyberPower UPS · CAT.6 patch panel ·
-AC Infinity cooling · wall-mounted server rack.
-
-## The site
-
-A multi-page static site (plain HTML / CSS / JavaScript) hosted on GitHub Pages, covering
-the network diagram, hardware, software stack, attacks & detections, custom detection rules,
-a build gallery, and full written documentation.
+pfSense (Netgate), UniFi, Proxmox, Active Directory, Security Onion, Suricata, Zeek, Wazuh, Nessus, Kali Linux, MITRE Caldera, Sliver C2, Hydra, Wireshark, Metasploitable3, DVWA.
 
 ## Documentation
 
-Written investigations and configuration references produced as deliverables for the
-independent study, covering the Wazuh offline install, interface & bridge mapping, a
-CVSS-scored vulnerability assessment, SIEM hunting queries, firewall rules, the full network
-& hardware build, an Active Directory attack-chain case study, and a risk-prioritization
-matrix.
+Written investigations, case studies, configuration docs, and reports are included in this repository and linked from the Documentation page on the site.
 
 ---
 
-*Domain: `siemlab.local` · DC01 at `10.0.30.10` · SIEM subnet `10.0.20.0/24` · Attack subnet `10.0.40.0/24`*
+Designed, built, and documented by **Tristen Dennis** — NMU Information Assurance & Cyber Defense.
