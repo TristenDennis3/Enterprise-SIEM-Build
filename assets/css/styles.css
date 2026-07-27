@@ -361,6 +361,11 @@ details[open] .chev { transform: rotate(180deg); }
 .xp-head .when { font-family: var(--f-mono); font-size: 0.78rem; color: var(--text-muted); white-space: nowrap; }
 .xp-item ul { margin: 8px 0 0; padding-left: 18px; color: var(--text-muted); font-size: 0.9rem; }
 .xp-item li { margin: 4px 0; }
+/* Documentation: original-file tiles */
+.doc .thumb.filethumb { display: grid; place-items: center; position: relative; background: linear-gradient(160deg, rgba(40,34,58,0.5), rgba(12,10,20,0.72)); }
+.doc .thumb.filethumb .fileicon { width: 56px; height: 68px; color: var(--fc, #8B5CF6); filter: drop-shadow(0 8px 18px rgba(0,0,0,0.55)); transition: transform var(--t-med); }
+.doc:hover .thumb.filethumb .fileicon { transform: translateY(-3px) scale(1.04); }
+.doc .thumb.filethumb .filebadge { position: absolute; bottom: 12px; right: 12px; font-family: var(--f-mono); font-size: 10.5px; letter-spacing: 0.12em; font-weight: 700; color: #0A0912; background: var(--fc, #8B5CF6); border-radius: 6px; padding: 3px 9px; }
 
 /* ---------- Diagram page ---------- */
 .diagram-frame { border-radius: var(--r-lg); border: 1px solid var(--card-border-hover); background: rgba(8,8,16,0.6); backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px); box-shadow: 0 20px 60px rgba(0,0,0,0.5), 0 0 40px rgba(217,70,239,0.15); padding: var(--s-3); cursor: zoom-in; overflow: hidden; }

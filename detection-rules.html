@@ -140,6 +140,25 @@
           </div>
 
           <div class="card rule reveal" style="--accent:#F97316;--accent-glow:rgba(249,115,22,0.42);">
+            <div class="rule-head"><h3>SPAN Flood Service (systemd autostart)</h3><span class="pill ok">Validated</span></div>
+            <p class="rule-sub">The flood setting doesn't survive a reboot. I replaced a flaky boot-time cron job (it fired before the network finished coming up) with a proper systemd oneshot service tied to <code class="inline-code">network-online.target</code>, so the flood settings re-apply reliably on every boot instead of by hand.</p>
+            <div class="code"><span class="cmt"># /etc/systemd/system/span-flood.service</span>
+<span class="attr">[Unit]</span>
+Description=Apply SPAN flood settings to vmbr2 monitoring bridge
+After=network-online.target
+Wants=network-online.target
+
+<span class="attr">[Service]</span>
+Type=oneshot
+ExecStart=<span class="fn">/usr/local/bin/span-flood.sh</span>
+RemainAfterExit=yes
+
+<span class="attr">[Install]</span>
+WantedBy=multi-user.target</div>
+            <p class="validate">Enabled with:<br><code class="inline-code">systemctl daemon-reload &amp;&amp; systemctl enable --now span-flood.service</code></p>
+          </div>
+
+          <div class="card rule reveal" style="--accent:#F97316;--accent-glow:rgba(249,115,22,0.42);">
             <div class="rule-head"><h3>Bridge Architecture</h3></div>
             <p class="rule-sub">Purpose-separated Linux bridges on the Proxmox host: vmbr1 for management (10.0.10.5/24), vmbr2 as the SPAN input from the mirror port, and vmbr3 as dedicated Security Onion management.</p>
             <div class="code">auto vmbr1              <span class="cmt"># management</span>
@@ -206,6 +225,21 @@ method=auto</div>
           <div class="card rule reveal" style="--accent:#EF4444;--accent-glow:rgba(239,68,68,0.42);">
             <div class="rule-head"><h3>Service Accounts as Attack Surface</h3></div>
             <p class="rule-sub">Created domain service accounts with registered SPNs (MSSQL service principals) so the environment presents realistic, crackable service tickets for Kerberoasting to target.</p>
+          </div>
+        </div>
+
+        <!-- Metasploitable -->
+        <div class="cat-label" style="margin-top:var(--s-4);">Metasploitable · Victim Host</div>
+        <div class="cfg-stack">
+          <div class="card rule reveal" style="--accent:#22C55E;--accent-glow:rgba(34,197,94,0.42);">
+            <div class="rule-head"><h3>Wazuh Agent Auto-Start (rc.local)</h3><span class="pill ok">Validated</span></div>
+            <p class="rule-sub">The Wazuh agent on Metasploitable (Ubuntu 14.04, SysV init) was linked as <code class="inline-code">K20</code>, which stops it at boot instead of starting it, so host detection on that box kept dropping. Because it is too old for systemd, I force-start the agent from <code class="inline-code">/etc/rc.local</code> on every boot.</p>
+            <div class="code"><span class="cmt"># /etc/rc.local  (add before the "exit 0" line)</span>
+<span class="fn">/var/ossec/bin/wazuh-control</span> start
+
+<span class="cmt"># make sure rc.local is executable so it runs at boot</span>
+<span class="fn">chmod</span> +x /etc/rc.local</div>
+            <p class="validate">Confirmed after a full reboot with:<br><code class="inline-code">/var/ossec/bin/wazuh-control status</code></p>
           </div>
         </div>
 
