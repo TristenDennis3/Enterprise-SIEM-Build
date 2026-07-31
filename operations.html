@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Operations · Enterprise SIEM Network</title>
+  <meta name="description" content="Inside the live SOC: dashboards and consoles from the running Enterprise SIEM Network — Wazuh, Security Onion, Suricata, and Nessus detections, threat hunting, and vulnerability management.">
+  <meta name="author" content="Tristen Dennis">
+  <meta property="og:title" content="Operations · Inside the SOC">
+  <meta property="og:description" content="Live dashboards and consoles from the running Enterprise SIEM Network.">
+  <meta property="og:type" content="website">
+  <link rel="icon" type="image/svg+xml" href="assets/img/logo.svg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/css/styles.css">
+</head>
+<body>
+  <div class="bg-fixed"></div>
+  <div id="bg-layer" aria-hidden="true"></div>
+  <div id="cursor-glow"></div>
+  <div id="scroll-bar"></div>
+
+  <nav class="nav">
+    <div class="nav-inner">
+      <a class="brand" href="index.html" aria-label="Enterprise SIEM Network Home">
+        <img class="monogram" src="assets/img/logo.svg" alt="TD monogram">
+        <span class="brand-text"><span class="wordmark">SIEM Network</span><span class="sub">Air-Gapped · Enterprise</span></span>
+      </a>
+      <button class="nav-toggle" aria-label="Toggle menu" aria-expanded="false"><span></span><span></span><span></span></button>
+      <ul class="nav-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="gallery.html">Gallery</a></li>
+        <li><a href="diagram.html">Diagram</a></li>
+        <li><a href="hardware.html">Hardware</a></li>
+        <li><a href="detection-rules.html">Detection &amp; Config</a></li>
+        <li><a href="software.html">Software</a></li>
+        <li><a href="attacks.html">Attacks</a></li>
+        <li><a href="operations.html" class="active">Operations</a></li>
+        <li><a href="documentation.html">Docs</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <main>
+    <section class="section">
+      <div class="container">
+        <div class="section-head">
+          <span class="eyebrow">Operations · Live Environment</span>
+          <h2 class="grad-text">Inside the SOC <span class="live"><span class="pulse"></span>Live</span></h2>
+          <p>Not mockups — the real consoles from the running Enterprise SIEM Network. Attacks generated, 4.2&nbsp;million logs collected across four VLANs, and detections firing in Wazuh, Security Onion, Suricata, and Nessus.</p>
+        </div>
+
+        <div class="soc">
+          <!-- KPI band -->
+          <div class="kpis reveal">
+            <div class="kpi" style="--kc:var(--electric-purple)"><div class="n">4.2M</div><div class="l">Logs analyzed</div></div>
+            <div class="kpi" style="--kc:var(--cyan)"><div class="n" data-count="10722">0</div><div class="l">Total alerts</div></div>
+            <div class="kpi" style="--kc:#EF4444"><div class="n" data-count="426">0</div><div class="l">Level 12+ critical</div></div>
+            <div class="kpi" style="--kc:#F59E0B"><div class="n" data-count="2042">0</div><div class="l">Vulnerabilities found</div></div>
+            <div class="kpi" style="--kc:#22C55E"><div class="n">4 VLANs</div><div class="l">Segmented &amp; monitored</div></div>
+          </div>
+
+          <!-- Filter -->
+          <div class="ops-filter reveal">
+            <button class="chip-f active" data-filter="all">All</button>
+            <button class="chip-f" data-filter="detection">Detection</button>
+            <button class="chip-f" data-filter="hunting">Threat Hunting</button>
+            <button class="chip-f" data-filter="vuln">Vulnerabilities</button>
+            <button class="chip-f" data-filter="attack">Attack Sim</button>
+            <button class="chip-f" data-filter="platform">Platform</button>
+          </div>
+
+          <!-- DETECTION & RESPONSE -->
+          <div class="ops-sec" data-cat="detection">
+            <div class="catrow"><span class="cbar" style="--cc:var(--pink)"></span><h3>Detection &amp; Response</h3><span class="cnt">WAZUH · SECURITY ONION · SURICATA</span></div>
+            <p class="cat-intro">Every attack against the lab is mapped to MITRE ATT&amp;CK and surfaced as a live alert — from the SIEM dashboards down to individual IDS signatures.</p>
+            <div class="ops-grid">
+              <div class="tile reveal" data-lightbox data-src="assets/img/soc/soc-mitre.png" data-cap="Wazuh — MITRE ATT&CK coverage across the lab"><div class="win"><span class="dots"><i></i><i></i><i></i></span><span class="app" style="--tc:var(--pink)">Wazuh · <b>MITRE ATT&CK</b></span></div><img class="ops-shot" src="assets/img/soc/soc-mitre.png" alt="Wazuh MITRE ATT&CK dashboard" loading="lazy"><div class="cap"><span class="tag" style="--tc:var(--pink)">FEATURED</span><h4>MITRE ATT&amp;CK coverage</h4><p>Every detection mapped to tactic and technique — alert evolution, top tactics, and a per-agent breakdown.</p></div></div>
+            </div>
+            <div class="ops-grid">
+              <div class="tile reveal" data-lightbox data-src="assets/img/soc/soc-events.png" data-cap="Wazuh — Security Events summary: 10,722 alerts"><div class="win"><span class="dots"><i></i><i></i><i></i></span><span class="app" style="--tc:var(--cyan)">Wazuh · <b>Security Events</b></span></div><img class="ops-shot" src="assets/img/soc/soc-events.png" alt="Wazuh Security Events summary" loading="lazy"><div class="cap"><h4>Alert summary — 10,722 events</h4><p>426 level-12+ critical alerts, authentication successes vs failures, and top-firing agents.</p></div></div>
+            </div>
+            <div class="ops-grid g2">
+              <div class="tile reveal" data-lightbox data-src="assets/img/soc/soc-suricata1.png" data-cap="Suricata — high-severity signature detections"><div class="win"><span class="dots"><i></i><i></i><i></i></span><span class="app" style="--tc:#EF4444">Security Onion · <b>Suricata</b></span></div><img class="ops-shot" src="assets/img/soc/soc-suricata1.png" alt="Suricata high severity alerts" loading="lazy"><div class="cap"><span class="tag" style="--tc:#EF4444">IDS</span><h4>High-severity signatures</h4><p>ET/GPL rules catching live CVE exploitation and reconnaissance.</p></div></div>
+              <div class="tile reveal" data-lightbox data-src="assets/img/soc/soc-suricata2.png" data-cap="Suricata — payload and scan detections"><div class="win"><span class="dots"><i></i><i></i><i></i></span><span class="app" style="--tc:#EF4444">Security Onion · <b>Suricata</b></span></div><img class="ops-shot" src="assets/img/soc/soc-suricata2.png" alt="Suricata payload and scan alerts" loading="lazy"><div class="cap"><span class="tag" style="--tc:#EF4444">IDS</span><h4>Payload &amp; scan detections</h4><p>Executable downloads, whoami execution, and brute-force scan attempts.</p></div></div>
+            </div>
+            <div class="ops-grid">
+              <div class="tile reveal" data-lightbox data-src="assets/img/soc/soc-overview.png" data-cap="Security Onion — 4.2M events collected"><div class="win"><span class="dots"><i></i><i></i><i></i></span><span class="app" style="--tc:var(--electric-blue)">Security Onion · <b>Overview</b></span></div><img class="ops-shot" src="assets/img/soc/soc-overview.png" alt="Security Onion overview - 4.2M events" loading="lazy"><div class="cap"><span class="tag" style="--tc:var(--electric-blue)">SIEM</span><h4>4.2M events at scale</h4><p>Full-network visibility from Zeek, Suricata, and host telemetry across every VLAN.</p></div></div>
+            </div>
+          </div>
+
+          <!-- THREAT HUNTING -->
+          <div class="ops-sec" data-cat="hunting">
+            <div class="catrow"><span class="cbar" style="--cc:var(--electric-purple)"></span><h3>Threat Hunting</h3><span class="cnt">SECURITY ONION · ZEEK</span></div>
+            <p class="cat-intro">Pivoting through the data to hunt what signatures miss — application-layer exploits, traffic patterns by segment, and protocol anomalies.</p>
+            <div class="ops-grid">
+              <div class="tile reveal" data-lightbox data-src="assets/img/soc/soc-log4shell.png" data-cap="Threat hunt — Log4Shell JNDI payload surfaced in HTTP metadata"><div class="win"><span class="dots"><i></i><i></i><i></i></span><span class="app" style="--tc:var(--electric-purple)">Security Onion · <b>Group Metrics</b></span></div><img class="ops-shot" src="assets/img/soc/soc-log4shell.png" alt="Log4Shell JNDI payload detected" loading="lazy"><div class="cap"><span class="tag" style="--tc:var(--electric-purple)">HUNT</span><h4>Log4Shell caught in traffic</h4><p>Hunting HTTP metadata surfaced the <code>${jndi:ldap://…}</code> exploitation string by source host.</p></div></div>
+            </div>
+            <div class="ops-grid">
+              <div class="tile reveal" data-lightbox data-src="assets/img/soc/soc-vlan.png" data-cap="Traffic by VLAN, source, and destination port"><div class="win"><span class="dots"><i></i><i></i><i></i></span><span class="app" style="--tc:var(--electric-purple)">Security Onion · <b>Traffic</b></span></div><img class="ops-shot" src="assets/img/soc/soc-vlan.png" alt="Traffic by VLAN" loading="lazy"><div class="cap"><h4>Traffic by VLAN &amp; port</h4><p>790k Zeek connection events broken down by segment, source, and destination port.</p></div></div>
+              <div class="tile reveal" data-lightbox data-src="assets/img/soc/soc-weird.png" data-cap="Zeek weird — protocol anomalies by host"><div class="win"><span class="dots"><i></i><i></i><i></i></span><span class="app" style="--tc:var(--electric-purple)">Security Onion · <b>Zeek Weird</b></span></div><img class="ops-shot" src="assets/img/soc/soc-weird.png" alt="Zeek protocol anomalies" loading="lazy"><div class="cap"><h4>Protocol anomalies</h4><p>Zeek "weird" events — malformed HTTP, bad TCP checksums, and other oddities by host.</p></div></div>
+            </div>
+          </div>
+
+          <!-- VULNERABILITY & COVERAGE -->
+          <div class="ops-sec" data-cat="vuln">
+            <div class="catrow"><span class="cbar" style="--cc:#F59E0B"></span><h3>Vulnerability &amp; Coverage</h3><span class="cnt">WAZUH · NESSUS · ATT&CK NAVIGATOR</span></div>
+            <p class="cat-intro">Finding and prioritizing weaknesses before an attacker does — severity triage, authenticated scanning, and a full technique-coverage map.</p>
+            <div class="ops-grid">
+              <div class="tile reveal" data-lightbox data-src="assets/img/soc/soc-vuln.png" data-cap="Wazuh — Vulnerability Detection: 35 critical, 1,385 high"><div class="win"><span class="dots"><i></i><i></i><i></i></span><span class="app" style="--tc:#F59E0B">Wazuh · <b>Vulnerability Detection</b></span></div><img class="ops-shot" src="assets/img/soc/soc-vuln.png" alt="Wazuh vulnerability detection" loading="lazy"><div class="cap"><span class="tag" style="--tc:#F59E0B">VULN MGMT</span><h4>Severity triage — 35 critical, 1,385 high</h4><p>Critical-to-low breakdown, top CVEs, most-vulnerable OS families, and vulnerabilities by year.</p></div></div>
+            </div>
+            <div class="ops-grid">
+              <div class="tile reveal" data-lightbox data-src="assets/img/soc/soc-nessus.png" data-cap="Nessus — 57 findings across 4 hosts, ranked by CVSS"><div class="win"><span class="dots"><i></i><i></i><i></i></span><span class="app" style="--tc:#EF4444">Nessus · <b>Network Scan</b></span></div><img class="ops-shot" src="assets/img/soc/soc-nessus.png" alt="Nessus network scan results" loading="lazy"><div class="cap"><span class="tag" style="--tc:#EF4444">SCAN</span><h4>57 findings across 4 hosts</h4><p>Authenticated network vulnerability scan, ranked by CVSS severity from critical to informational.</p></div></div>
+            </div>
+            <div class="ops-grid">
+              <div class="tile reveal" data-lightbox data-src="assets/img/soc/soc-hygiene.png" data-cap="Wazuh — IT hygiene: OS, packages, processes, memory"><div class="win"><span class="dots"><i></i><i></i><i></i></span><span class="app" style="--tc:#22C55E">Wazuh · <b>IT Hygiene</b></span></div><img class="ops-shot" src="assets/img/soc/soc-hygiene.png" alt="Wazuh IT hygiene dashboard" loading="lazy"><div class="cap"><span class="tag" style="--tc:#22C55E">POSTURE</span><h4>Endpoint hygiene</h4><p>OS families, package inventory, running processes, and memory usage by host.</p></div></div>
+            </div>
+            <div class="ops-grid">
+              <div class="tile reveal" style="cursor:default"><div class="win"><span class="dots"><i></i><i></i><i></i></span><span class="app" style="--tc:var(--electric-blue)">MITRE &middot; <b>ATT&CK Coverage</b></span></div><div class="atk-scroll" style="border:0;border-radius:0;background:transparent;padding:16px"><div class="atk-meta"><span><b>92</b> techniques covered</span><span><b>14</b> tactics</span><span><b>46%</b> of ATT&CK exercised</span></div><div class="atk-matrix"><div class="atk-col"><div class="atk-head"><span class="atk-tac">Reconnaissance</span><span class="atk-num">10</span></div><div class="atk-cell">Active Scanning</div><div class="atk-cell">Gather Victim Host Info</div><div class="atk-cell">Gather Victim Identity Info</div><div class="atk-cell on" style="--c:#F472B6">Gather Victim Network Info</div><div class="atk-cell">Gather Victim Org Info</div><div class="atk-cell">Phishing for Information</div><div class="atk-cell">Search Closed Sources</div><div class="atk-cell">Search Open Technical Databases</div><div class="atk-cell on" style="--c:#EC4899">Search Open Websites/Domains</div><div class="atk-cell">Search Victim-Owned Websites</div></div><div class="atk-col"><div class="atk-head"><span class="atk-tac">Resource Development</span><span class="atk-num">8</span></div><div class="atk-cell">Acquire Access</div><div class="atk-cell on" style="--c:#D946EF">Acquire Infrastructure</div><div class="atk-cell">Compromise Accounts</div><div class="atk-cell">Compromise Infrastructure</div><div class="atk-cell on" style="--c:#A855F7">Develop Capabilities</div><div class="atk-cell">Establish Accounts</div><div class="atk-cell">Obtain Capabilities</div><div class="atk-cell">Stage Capabilities</div></div><div class="atk-col"><div class="atk-head"><span class="atk-tac">Initial Access</span><span class="atk-num">10</span></div><div class="atk-cell">Content Injection</div><div class="atk-cell on" style="--c:#8B5CF6">Drive-by Compromise</div><div class="atk-cell on" style="--c:#6366F1">Exploit Public-Facing App</div><div class="atk-cell on" style="--c:#3B82F6">External Remote Services</div><div class="atk-cell">Hardware Additions</div><div class="atk-cell on" style="--c:#22D3EE">Phishing</div><div class="atk-cell">Replication Thru Removable Media</div><div class="atk-cell">Supply Chain Compromise</div><div class="atk-cell">Trusted Relationship</div><div class="atk-cell on" style="--c:#22C55E">Valid Accounts</div></div><div class="atk-col"><div class="atk-head"><span class="atk-tac">Execution</span><span class="atk-num">14</span></div><div class="atk-cell">Cloud Administration Command</div><div class="atk-cell on" style="--c:#F59E0B">Command & Scripting Interpreter</div><div class="atk-cell">Container Administration Command</div><div class="atk-cell">Deploy Container</div><div class="atk-cell on" style="--c:#F472B6">Exploitation for Client Execution</div><div class="atk-cell on" style="--c:#EC4899">Inter-Process Communication</div><div class="atk-cell">Native API</div><div class="atk-cell on" style="--c:#D946EF">Scheduled Task/Job</div><div class="atk-cell">Serverless Execution</div><div class="atk-cell">Shared Modules</div><div class="atk-cell on" style="--c:#A855F7">Software Deployment Tools</div><div class="atk-cell on" style="--c:#8B5CF6">System Services</div><div class="atk-cell on" style="--c:#6366F1">User Execution</div><div class="atk-cell on" style="--c:#3B82F6">Windows Management Instrumentation</div></div><div class="atk-col"><div class="atk-head"><span class="atk-tac">Persistence</span><span class="atk-num">20</span></div><div class="atk-cell on" style="--c:#22D3EE">Account Manipulation</div><div class="atk-cell">BITS Jobs</div><div class="atk-cell on" style="--c:#22C55E">Boot/Logon Autostart Exec</div><div class="atk-cell on" style="--c:#F59E0B">Boot/Logon Init Scripts</div><div class="atk-cell">Browser Extensions</div><div class="atk-cell">Compromise Host SW Binary</div><div class="atk-cell on" style="--c:#F472B6">Create Account</div><div class="atk-cell on" style="--c:#EC4899">Create/Modify System Process</div><div class="atk-cell">Event Triggered Execution</div><div class="atk-cell on" style="--c:#D946EF">External Remote Services</div><div class="atk-cell">Hijack Execution Flow</div><div class="atk-cell">Implant Internal Image</div><div class="atk-cell on" style="--c:#A855F7">Modify Auth Process</div><div class="atk-cell">Office Application Startup</div><div class="atk-cell">Power Settings</div><div class="atk-cell">Pre-OS Boot</div><div class="atk-cell on" style="--c:#8B5CF6">Scheduled Task/Job</div><div class="atk-cell">Server Software Component</div><div class="atk-cell">Traffic Signaling</div><div class="atk-cell on" style="--c:#6366F1">Valid Accounts</div></div><div class="atk-col"><div class="atk-head"><span class="atk-tac">Privilege Escalation</span><span class="atk-num">14</span></div><div class="atk-cell on" style="--c:#3B82F6">Abuse Elevation Control</div><div class="atk-cell on" style="--c:#22D3EE">Access Token Manipulation</div><div class="atk-cell on" style="--c:#22C55E">Account Manipulation</div><div class="atk-cell on" style="--c:#F59E0B">Boot/Logon Autostart Exec</div><div class="atk-cell on" style="--c:#F472B6">Boot/Logon Init Scripts</div><div class="atk-cell on" style="--c:#EC4899">Create/Modify System Process</div><div class="atk-cell on" style="--c:#D946EF">Domain Policy Modification</div><div class="atk-cell">Escape to Host</div><div class="atk-cell">Event Triggered Execution</div><div class="atk-cell on" style="--c:#A855F7">Exploitation for Priv Esc</div><div class="atk-cell">Hijack Execution Flow</div><div class="atk-cell on" style="--c:#8B5CF6">Process Injection</div><div class="atk-cell on" style="--c:#6366F1">Scheduled Task/Job</div><div class="atk-cell on" style="--c:#3B82F6">Valid Accounts</div></div><div class="atk-col"><div class="atk-head"><span class="atk-tac">Defense Evasion</span><span class="atk-num">23</span></div><div class="atk-cell on" style="--c:#22D3EE">Abuse Elevation Control</div><div class="atk-cell on" style="--c:#22C55E">Access Token Manipulation</div><div class="atk-cell">BITS Jobs</div><div class="atk-cell">Build Image on Host</div><div class="atk-cell">Debugger Evasion</div><div class="atk-cell on" style="--c:#F59E0B">Deobfuscate/Decode Files</div><div class="atk-cell">Deploy Container</div><div class="atk-cell">Direct Volume Access</div><div class="atk-cell on" style="--c:#F472B6">Domain Policy Modification</div><div class="atk-cell">Execution Guardrails</div><div class="atk-cell">Exploitation for Def Evasion</div><div class="atk-cell on" style="--c:#EC4899">File/Dir Permissions Mod</div><div class="atk-cell on" style="--c:#D946EF">Hide Artifacts</div><div class="atk-cell">Hijack Execution Flow</div><div class="atk-cell on" style="--c:#A855F7">Impair Defenses</div><div class="atk-cell on" style="--c:#8B5CF6">Indicator Removal</div><div class="atk-cell">Indirect Command Execution</div><div class="atk-cell on" style="--c:#6366F1">Masquerading</div><div class="atk-cell on" style="--c:#3B82F6">Modify Auth Process</div><div class="atk-cell on" style="--c:#22D3EE">Modify Registry</div><div class="atk-cell on" style="--c:#22C55E">Obfuscated Files/Info</div><div class="atk-cell on" style="--c:#F59E0B">Process Injection</div><div class="atk-cell on" style="--c:#F472B6">Valid Accounts</div></div><div class="atk-col"><div class="atk-head"><span class="atk-tac">Credential Access</span><span class="atk-num">15</span></div><div class="atk-cell">Adversary-in-the-Middle</div><div class="atk-cell on" style="--c:#EC4899">Brute Force</div><div class="atk-cell on" style="--c:#D946EF">Credentials from Password Stores</div><div class="atk-cell">Exploitation for Cred Access</div><div class="atk-cell on" style="--c:#A855F7">Forced Authentication</div><div class="atk-cell">Forge Web Credentials</div><div class="atk-cell">Input Capture</div><div class="atk-cell on" style="--c:#8B5CF6">Modify Auth Process</div><div class="atk-cell">MFA Interception</div><div class="atk-cell">MFA Request Generation</div><div class="atk-cell on" style="--c:#6366F1">Network Sniffing</div><div class="atk-cell on" style="--c:#3B82F6">OS Credential Dumping</div><div class="atk-cell on" style="--c:#22D3EE">Steal/Forge Kerberos Tickets</div><div class="atk-cell">Steal Web Session Cookie</div><div class="atk-cell on" style="--c:#22C55E">Unsecured Credentials</div></div><div class="atk-col"><div class="atk-head"><span class="atk-tac">Discovery</span><span class="atk-num">22</span></div><div class="atk-cell on" style="--c:#F59E0B">Account Discovery</div><div class="atk-cell">App Window Discovery</div><div class="atk-cell">Browser Info Discovery</div><div class="atk-cell">Cloud Discovery</div><div class="atk-cell">Container Discovery</div><div class="atk-cell">Debugger Evasion</div><div class="atk-cell">Device Driver Discovery</div><div class="atk-cell on" style="--c:#F472B6">Domain Trust Discovery</div><div class="atk-cell on" style="--c:#EC4899">File/Directory Discovery</div><div class="atk-cell on" style="--c:#D946EF">Group Policy Discovery</div><div class="atk-cell">Log Enumeration</div><div class="atk-cell on" style="--c:#A855F7">Network Service Discovery</div><div class="atk-cell on" style="--c:#8B5CF6">Network Share Discovery</div><div class="atk-cell on" style="--c:#6366F1">Network Sniffing</div><div class="atk-cell on" style="--c:#3B82F6">Password Policy Discovery</div><div class="atk-cell on" style="--c:#22D3EE">Permission Groups Discovery</div><div class="atk-cell on" style="--c:#22C55E">Process Discovery</div><div class="atk-cell on" style="--c:#F59E0B">Query Registry</div><div class="atk-cell on" style="--c:#F472B6">Remote System Discovery</div><div class="atk-cell on" style="--c:#EC4899">System Info Discovery</div><div class="atk-cell on" style="--c:#D946EF">System Network Config Discovery</div><div class="atk-cell on" style="--c:#A855F7">System Owner/User Discovery</div></div><div class="atk-col"><div class="atk-head"><span class="atk-tac">Lateral Movement</span><span class="atk-num">9</span></div><div class="atk-cell on" style="--c:#8B5CF6">Exploitation of Remote Services</div><div class="atk-cell">Internal Spearphishing</div><div class="atk-cell on" style="--c:#6366F1">Lateral Tool Transfer</div><div class="atk-cell on" style="--c:#3B82F6">Remote Service Session Hijack</div><div class="atk-cell on" style="--c:#22D3EE">Remote Services</div><div class="atk-cell">Replication Thru Removable Media</div><div class="atk-cell on" style="--c:#22C55E">Software Deployment Tools</div><div class="atk-cell">Taint Shared Content</div><div class="atk-cell on" style="--c:#F59E0B">Use Alternate Auth Material</div></div><div class="atk-col"><div class="atk-head"><span class="atk-tac">Collection</span><span class="atk-num">15</span></div><div class="atk-cell on" style="--c:#F472B6">Archive Collected Data</div><div class="atk-cell">Audio Capture</div><div class="atk-cell">Automated Collection</div><div class="atk-cell">Browser Session Hijacking</div><div class="atk-cell">Clipboard Data</div><div class="atk-cell">Data from Cloud Storage</div><div class="atk-cell">Data from Config Repository</div><div class="atk-cell">Data from Info Repositories</div><div class="atk-cell on" style="--c:#EC4899">Data from Local System</div><div class="atk-cell on" style="--c:#D946EF">Data from Network Shared Drive</div><div class="atk-cell">Data from Removable Media</div><div class="atk-cell on" style="--c:#A855F7">Data Staged</div><div class="atk-cell">Email Collection</div><div class="atk-cell">Input Capture</div><div class="atk-cell">Screen Capture</div></div><div class="atk-col"><div class="atk-head"><span class="atk-tac">Command and Control</span><span class="atk-num">16</span></div><div class="atk-cell on" style="--c:#8B5CF6">Application Layer Protocol</div><div class="atk-cell">Comm Thru Removable Media</div><div class="atk-cell">Content Injection</div><div class="atk-cell">Data Encoding</div><div class="atk-cell">Data Obfuscation</div><div class="atk-cell">Dynamic Resolution</div><div class="atk-cell on" style="--c:#6366F1">Encrypted Channel</div><div class="atk-cell">Fallback Channels</div><div class="atk-cell">Hide Infrastructure</div><div class="atk-cell on" style="--c:#3B82F6">Ingress Tool Transfer</div><div class="atk-cell">Multi-Stage Channels</div><div class="atk-cell on" style="--c:#22D3EE">Non-Application Layer Protocol</div><div class="atk-cell">Protocol Tunneling</div><div class="atk-cell on" style="--c:#22C55E">Proxy</div><div class="atk-cell on" style="--c:#F59E0B">Remote Access Software</div><div class="atk-cell">Web Service</div></div><div class="atk-col"><div class="atk-head"><span class="atk-tac">Exfiltration</span><span class="atk-num">9</span></div><div class="atk-cell">Automated Exfiltration</div><div class="atk-cell">Data Transfer Size Limits</div><div class="atk-cell">Exfil Over Alt Protocol</div><div class="atk-cell on" style="--c:#F472B6">Exfil Over C2 Channel</div><div class="atk-cell">Exfil Over Other Network</div><div class="atk-cell">Exfil Over Physical Medium</div><div class="atk-cell">Exfil Over Web Service</div><div class="atk-cell">Scheduled Transfer</div><div class="atk-cell">Transfer Data to Cloud</div></div><div class="atk-col"><div class="atk-head"><span class="atk-tac">Impact</span><span class="atk-num">14</span></div><div class="atk-cell">Account Access Removal</div><div class="atk-cell">Data Destruction</div><div class="atk-cell on" style="--c:#EC4899">Data Encrypted for Impact</div><div class="atk-cell">Data Manipulation</div><div class="atk-cell">Defacement</div><div class="atk-cell">Disk Wipe</div><div class="atk-cell">Endpoint DoS</div><div class="atk-cell">Financial Theft</div><div class="atk-cell">Firmware Corruption</div><div class="atk-cell">Inhibit System Recovery</div><div class="atk-cell">Network DoS</div><div class="atk-cell">Resource Hijacking</div><div class="atk-cell">Service Stop</div><div class="atk-cell">System Shutdown/Reboot</div></div></div></div><div class="cap"><span class="tag" style="--tc:var(--electric-blue)">COVERAGE</span><h4>Technique coverage matrix</h4><p>92 techniques exercised across 14 tactics &mdash; a self-built interactive matrix, not a screenshot.</p></div></div>
+            </div>
+          </div>
+
+          <!-- ATTACK SIMULATION -->
+          <div class="ops-sec" data-cat="attack">
+            <div class="catrow"><span class="cbar" style="--cc:var(--hot-pink)"></span><h3>Attack Simulation</h3><span class="cnt">KALI · SLIVER · METASPLOIT · CALDERA</span></div>
+            <p class="cat-intro">The offensive side of the lab — the C2 frameworks and tooling used to generate the very traffic the blue team detects.</p>
+            <div class="ops-grid g3">
+              <div class="tile reveal" data-lightbox data-src="assets/img/soc/soc-sliver.png" data-cap="Sliver C2 — HTTP beacon implant generation"><div class="win"><span class="dots"><i></i><i></i><i></i></span><span class="app" style="--tc:var(--pink)">Kali · <b>Sliver C2</b></span></div><img class="ops-shot ops-term" src="assets/img/soc/soc-sliver.png" alt="Sliver C2 beacon generation" loading="lazy"><div class="cap"><span class="tag" style="--tc:var(--pink)">C2</span><h4>Sliver implant generation</h4><p>HTTP beacon built with symbol obfuscation, then the listener started.</p></div></div>
+              <div class="tile reveal" data-lightbox data-src="assets/img/soc/soc-msf.png" data-cap="Metasploit Framework console"><div class="win"><span class="dots"><i></i><i></i><i></i></span><span class="app" style="--tc:#EF4444">Kali · <b>Metasploit</b></span></div><img class="ops-shot ops-term" src="assets/img/soc/soc-msf.png" alt="Metasploit Framework console" loading="lazy"><div class="cap"><span class="tag" style="--tc:#EF4444">EXPLOIT</span><h4>Metasploit Framework</h4><p>2,600+ exploits and 1,700+ payloads staged for the engagement.</p></div></div>
+              <div class="tile reveal" data-lightbox data-src="assets/img/soc/soc-caldera.png" data-cap="MITRE Caldera — adversary emulation server"><div class="win"><span class="dots"><i></i><i></i><i></i></span><span class="app" style="--tc:var(--electric-purple)">Kali · <b>MITRE Caldera</b></span></div><img class="ops-shot ops-term" src="assets/img/soc/soc-caldera.png" alt="MITRE Caldera server" loading="lazy"><div class="cap"><span class="tag" style="--tc:var(--electric-purple)">EMULATION</span><h4>Caldera automation</h4><p>Automated ATT&amp;CK adversary emulation orchestrating scripted attack chains.</p></div></div>
+            </div>
+          </div>
+
+          <!-- PLATFORM & HEALTH -->
+          <div class="ops-sec" data-cat="platform">
+            <div class="catrow"><span class="cbar" style="--cc:#22C55E"></span><h3>Platform &amp; Health</h3><span class="cnt">SECURITY ONION · WAZUH · SALTSTACK</span></div>
+            <p class="cat-intro">The infrastructure behind it all — a healthy, agent-covered, config-managed stack built and maintained from the ground up.</p>
+            <div class="ops-grid g3">
+              <div class="tile reveal" data-lightbox data-src="assets/img/soc/soc-status.png" data-cap="Security Onion so-status — every container healthy"><div class="win"><span class="dots"><i></i><i></i><i></i></span><span class="app" style="--tc:#22C55E">Security Onion · <b>so-status</b></span></div><img class="ops-shot ops-term" src="assets/img/soc/soc-status.png" alt="Security Onion so-status" loading="lazy"><div class="cap"><span class="tag" style="--tc:#22C55E">HEALTH</span><h4>Full stack, all green</h4><p>Every Security Onion container up and healthy.</p></div></div>
+              <div class="tile reveal" data-lightbox data-src="assets/img/soc/soc-agents.png" data-cap="Wazuh — enrolled agents reporting"><div class="win"><span class="dots"><i></i><i></i><i></i></span><span class="app" style="--tc:var(--cyan)">Wazuh · <b>Agents</b></span></div><img class="ops-shot ops-term" src="assets/img/soc/soc-agents.png" alt="Wazuh enrolled agents" loading="lazy"><div class="cap"><span class="tag" style="--tc:var(--cyan)">ENDPOINTS</span><h4>Agents enrolled &amp; reporting</h4><p>Host telemetry from DC01, DVWA, Metasploitable3, and the Windows victim.</p></div></div>
+              <div class="tile reveal" data-lightbox data-src="assets/img/soc/soc-salt.png" data-cap="SaltStack highstate — configuration management run"><div class="win"><span class="dots"><i></i><i></i><i></i></span><span class="app" style="--tc:#F59E0B">Security Onion · <b>SaltStack</b></span></div><img class="ops-shot ops-term" src="assets/img/soc/soc-salt.png" alt="SaltStack highstate" loading="lazy"><div class="cap"><span class="tag" style="--tc:#F59E0B">CONFIG MGMT</span><h4>Salt highstate</h4><p>Configuration management enforced across the Security Onion grid.</p></div></div>
+            </div>
+            <div class="ops-grid">
+              <div class="tile reveal" data-lightbox data-src="assets/img/soc/soc-infra.png" data-cap="Nessus host — LVM storage expansion"><div class="win"><span class="dots"><i></i><i></i><i></i></span><span class="app" style="--tc:var(--cyan)">Nessus · <b>Host</b></span></div><img class="ops-shot ops-term" src="assets/img/soc/soc-infra.png" alt="Nessus host provisioning" loading="lazy"><div class="cap"><span class="tag" style="--tc:var(--cyan)">INFRA</span><h4>Scanner provisioning</h4><p>LVM storage expansion on the Nessus host — hands-on Linux administration.</p></div></div>
+              <div class="tile reveal" data-lightbox data-src="assets/img/soc/soc-grafana.png" data-cap="Grafana — system and container performance"><div class="win"><span class="dots"><i></i><i></i><i></i></span><span class="app" style="--tc:var(--electric-blue)">Grafana · <b>Performance</b></span></div><img class="ops-shot" src="assets/img/soc/soc-grafana.png" alt="Grafana performance dashboard" loading="lazy"><div class="cap"><span class="tag" style="--tc:var(--electric-blue)">MONITORING</span><h4>Resource telemetry</h4><p>System and container CPU, memory, and IO across the stack.</p></div></div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <button id="to-top" aria-label="Back to top"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 19V5M5 12l7-7 7 7"/></svg></button>
+  <footer class="footer">
+    <div class="container footer-inner">
+      <div class="fbrand"><img class="monogram" src="assets/img/logo.svg" alt="TD monogram"><p>Designed, built, and documented by <strong style="color:var(--text)">Tristen Dennis</strong></p></div>
+      <div class="social">
+        <a href="https://github.com/TristenDennis3" target="_blank" rel="noopener" aria-label="GitHub"><svg width="19" height="19" viewBox="0 0 24 24" fill="currentColor"><path d="M12 .5C5.7.5.5 5.7.5 12c0 5.1 3.3 9.4 7.9 10.9.6.1.8-.2.8-.6v-2c-3.2.7-3.9-1.4-3.9-1.4-.5-1.3-1.3-1.7-1.3-1.7-1.1-.7.1-.7.1-.7 1.2.1 1.8 1.2 1.8 1.2 1 1.8 2.7 1.3 3.4 1 .1-.8.4-1.3.7-1.6-2.6-.3-5.3-1.3-5.3-5.7 0-1.3.5-2.3 1.2-3.1-.1-.3-.5-1.5.1-3.1 0 0 1-.3 3.3 1.2a11.5 11.5 0 0 1 6 0C17 5.3 18 5.6 18 5.6c.6 1.6.2 2.8.1 3.1.7.8 1.2 1.8 1.2 3.1 0 4.4-2.7 5.4-5.3 5.7.4.4.8 1.1.8 2.2v3.3c0 .4.2.7.8.6 4.6-1.5 7.9-5.8 7.9-10.9C23.5 5.7 18.3.5 12 .5z"/></svg></a>
+        <a href="https://www.linkedin.com/in/tristen-dennis" target="_blank" rel="noopener" aria-label="LinkedIn"><svg width="19" height="19" viewBox="0 0 24 24" fill="currentColor"><path d="M20.4 3H3.6A.6.6 0 0 0 3 3.6v16.8a.6.6 0 0 0 .6.6h16.8a.6.6 0 0 0 .6-.6V3.6a.6.6 0 0 0-.6-.6zM8.3 18.3H5.5V9.5h2.8v8.8zM6.9 8.3a1.6 1.6 0 1 1 0-3.2 1.6 1.6 0 0 1 0 3.2zm11.4 10h-2.8v-4.3c0-1 0-2.3-1.4-2.3s-1.6 1.1-1.6 2.3v4.4H9.7V9.5h2.7v1.2h.1c.4-.7 1.3-1.4 2.6-1.4 2.8 0 3.3 1.8 3.3 4.2v4.8z"/></svg></a>
+      </div>
+    </div>
+  </footer>
+  <script src="assets/js/main.js"></script>
+  <script>
+  (function () {
+    /* KPI count-up on scroll into view */
+    var counters = Array.prototype.slice.call(document.querySelectorAll('.soc .kpi .n[data-count]'));
+    function animate(el) {
+      var target = parseInt(el.getAttribute('data-count'), 10), start = null, dur = 1400;
+      function step(ts) {
+        if (!start) start = ts;
+        var p = Math.min((ts - start) / dur, 1);
+        var eased = 1 - Math.pow(1 - p, 3);
+        el.textContent = Math.floor(eased * target).toLocaleString('en-US');
+        if (p < 1) requestAnimationFrame(step); else el.textContent = target.toLocaleString('en-US');
+      }
+      requestAnimationFrame(step);
+    }
+    if ('IntersectionObserver' in window) {
+      var io = new IntersectionObserver(function (entries) {
+        entries.forEach(function (e) { if (e.isIntersecting) { animate(e.target); io.unobserve(e.target); } });
+      }, { threshold: 0.5 });
+      counters.forEach(function (c) { io.observe(c); });
+    } else { counters.forEach(animate); }
+
+    /* Category filter */
+    var chips = Array.prototype.slice.call(document.querySelectorAll('.soc .chip-f'));
+    var secs = Array.prototype.slice.call(document.querySelectorAll('.soc .ops-sec'));
+    chips.forEach(function (chip) {
+      chip.addEventListener('click', function () {
+        chips.forEach(function (c) { c.classList.remove('active'); });
+        chip.classList.add('active');
+        var f = chip.getAttribute('data-filter');
+        secs.forEach(function (s) {
+          s.classList.toggle('hide', !(f === 'all' || s.getAttribute('data-cat') === f));
+        });
+      });
+    });
+    /* blur-in on screenshot load */
+    var shots=Array.prototype.slice.call(document.querySelectorAll('.soc .ops-shot'));
+    shots.forEach(function(img){ if(img.complete && img.naturalWidth){ img.classList.add('loaded'); } else { img.addEventListener('load', function(){ img.classList.add('loaded'); }); img.addEventListener('error', function(){ img.classList.add('loaded'); }); } });
+    setTimeout(function(){ shots.forEach(function(i){ i.classList.add('loaded'); }); }, 4000);
+  })();
+  </script>
+</body>
+</html>
