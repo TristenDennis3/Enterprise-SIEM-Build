@@ -161,7 +161,7 @@ WantedBy=multi-user.target</div>
 
           <div class="card rule reveal" style="--accent:#F97316;--accent-glow:rgba(249,115,22,0.42);">
             <div class="rule-head"><h3>Bridge Architecture</h3></div>
-            <p class="rule-sub">Purpose-separated Linux bridges on the Proxmox host: vmbr1 for management (10.0.10.5/24), vmbr2 as the SPAN input from the mirror port, and vmbr3 as dedicated Security Onion management.</p>
+            <p class="rule-sub">Wazuh and Nessus were originally routed through the same physical interface as Security Onion's management on the SIEM VLAN. To reduce contention on that shared link, I added two dedicated bridges (vmbr4 and vmbr5), each mapped to its own physical NIC, and moved Wazuh and Nessus onto them. This gave each system its own physical path to the switch and significantly reduced the sensor's capture loss.</p>
             <div class="code">auto vmbr1              <span class="cmt"># management</span>
 iface vmbr1 inet static
     address 10.0.10.5/24
@@ -173,12 +173,20 @@ iface vmbr2 inet manual
 
 auto vmbr3              <span class="cmt"># dedicated SO mgmt</span>
 iface vmbr3 inet manual
-    bridge-ports enp6s0f1</div>
+    bridge-ports enp6s0f1
+
+auto vmbr4              <span class="cmt"># dedicated Wazuh</span>
+iface vmbr4 inet manual
+    bridge-ports enp6s0f2
+
+auto vmbr5              <span class="cmt"># dedicated Nessus</span>
+iface vmbr5 inet manual
+    bridge-ports enp6s0f3</div>
           </div>
 
           <div class="card rule reveal" style="--accent:#F97316;--accent-glow:rgba(249,115,22,0.42);">
             <div class="rule-head"><h3>Static IP Addressing Scheme</h3></div>
-            <p class="rule-sub">A segmented static addressing scheme designed and configured across four VLANs, applied to every endpoint so the environment is predictable and fully documented.</p>
+            <p class="rule-sub">A segmented static addressing scheme configured across four VLANs, applied to every endpoint so the environment is predictable and fully documented.</p>
             <div class="table-wrap" style="margin-top:var(--s-2);">
               <table class="soft"><thead><tr><th style="width:110px;">VLAN</th><th>Purpose / Subnet</th><th>Key Hosts</th></tr></thead><tbody>
                 <tr class="row"><td>VLAN 10</td><td>Management · 10.0.10.0/24</td><td>Proxmox (.5)</td></tr>
@@ -195,15 +203,16 @@ iface vmbr3 inet manual
         <div class="cfg-stack">
           <div class="card rule reveal" style="--accent:#3B82F6;--accent-glow:rgba(59,130,246,0.42);">
             <div class="rule-head"><h3>Monitoring &amp; Management Interfaces</h3></div>
-            <p class="rule-sub">The management interface (ens18) is set to a static IP on the SIEM VLAN, while the monitoring interface (ens19) is configured with autoconnect off so it passively sniffs mirrored traffic rather than carrying an address.</p>
+            <p class="rule-sub">The management interface (ens18) is set to a static IP on the SIEM VLAN. Two monitoring interfaces (ens19 and ens20) are bonded into bond0, which carries no IP address and passively sniffs the mirrored SPAN traffic rather than routing it. Bonding the two interfaces provides additional capture capacity for the mirrored traffic.</p>
             <div class="code"><span class="cmt"># ens18 - management</span>
 address1=10.0.20.10/24
 gateway=10.0.20.1
 method=manual
 
-<span class="cmt"># ens19 - monitoring (passive)</span>
+<span class="cmt"># ens19 + ens20 - monitoring (passive, bonded)</span>
+<span class="cmt"># bonded into bond0, no IP, round-robin</span>
 autoconnect=false
-method=auto</div>
+method=disabled</div>
           </div>
         </div>
 
