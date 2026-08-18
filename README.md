@@ -1,6 +1,6 @@
 # Enterprise SIEM Network
 
-A fully segmented, air-gapped Security Information and Event Management (SIEM) lab — designed, built, and documented from the ground up. Four isolated VLANs, dual SIEM platforms, live adversary emulation, and custom detection engineering.
+A fully segmented, air-gapped Security Information and Event Management (SIEM) lab — designed, built, and documented from the ground up. Four isolated VLANs, dual SIEM platforms, live adversary emulation, and custom detection engineering. Configuration documentation on my Website.
 
 **Live site:** https://tristendennis3.github.io/Enterprise-SIEM-Build/
 
