@@ -556,3 +556,29 @@ details[open] .chev { transform: rotate(180deg); }
 .stack .pic svg{width:100%;height:100%;filter:drop-shadow(0 0 4px var(--bc)) drop-shadow(0 0 12px color-mix(in srgb,var(--bc) 80%,transparent))}
 .stack .pl{position:relative;font-size:12px;color:#e9e6f2;font-weight:500}
 @media (max-width:640px){.stack .pcard{width:104px;height:104px}}
+
+/* ============================================================
+   Detection & Config — per-language code palettes (site bg kept)
+   shell = Neon · config = Nord · Wazuh XML = GitHub Dark
+   ============================================================ */
+.code.lang-shell .cmt{color:#6B7280;font-style:italic}
+.code.lang-shell .kw{color:#F472B6;font-weight:600}
+.code.lang-shell .fn{color:#93C5FD}
+.code.lang-shell .str{color:#FDE68A}
+.code.lang-shell .val{color:#C4B5FD}
+.code.lang-shell .attr{color:#7DD3FC}
+.code.lang-conf{color:#D8DEE9}
+.code.lang-conf .cmt{color:#7C89A4;font-style:italic}
+.code.lang-conf .kw{color:#81A1C1;font-weight:600}
+.code.lang-conf .fn{color:#88C0D0}
+.code.lang-conf .attr{color:#81A1C1}
+.code.lang-conf .str{color:#A3BE8C}
+.code.lang-conf .val{color:#EBCB8B}
+.code.lang-xml{color:#C9D1D9}
+.code.lang-xml .cmt{color:#8B949E;font-style:italic}
+.code.lang-xml .tag{color:#7EE787}
+.code.lang-xml .attr{color:#79C0FF}
+.code.lang-xml .str{color:#A5D6FF}
+.code.lang-xml .val{color:#A5D6FF}
+.code.lang-xml .kw{color:#FF7B72}
+.code.lang-xml .fn{color:#D2A8FF}

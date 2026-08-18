@@ -131,7 +131,7 @@
           <div class="card rule reveal" style="--accent:#F97316;--accent-glow:rgba(249,115,22,0.42);">
             <div class="rule-head"><h3>SPAN Flood Script</h3><span class="pill ok">Validated</span></div>
             <p class="rule-sub">A bash script that dynamically finds every port on the SPAN bridge (vmbr2) and forces it into flood mode with learning disabled, so all mirrored traffic reaches Security Onion.</p>
-            <div class="code"><span class="cmt">#!/bin/bash</span>
+            <div class="code lang-shell"><span class="cmt">#!/bin/bash</span>
 <span class="cmt"># Apply SPAN flood settings to all ports on vmbr2 (SPAN bridge)</span>
 <span class="kw">for</span> IFACE <span class="kw">in</span> $(bridge link | grep <span class="str">"master vmbr2"</span> | awk -F: '{print $2}' | awk '{print $1}'); <span class="kw">do</span>
     <span class="fn">bridge</span> link set dev <span class="str">"$IFACE"</span> flood <span class="kw">on</span>
@@ -143,45 +143,45 @@
           <div class="card rule reveal" style="--accent:#F97316;--accent-glow:rgba(249,115,22,0.42);">
             <div class="rule-head"><h3>SPAN Flood Service (systemd autostart)</h3><span class="pill ok">Validated</span></div>
             <p class="rule-sub">The flood setting doesn't survive a reboot. I replaced a flaky boot-time cron job (it fired before the network finished coming up) with a proper systemd oneshot service tied to <code class="inline-code">network-online.target</code>, so the flood settings re-apply reliably on every boot instead of by hand.</p>
-            <div class="code"><span class="cmt"># /etc/systemd/system/span-flood.service</span>
+            <div class="code lang-conf"><span class="cmt"># /etc/systemd/system/span-flood.service</span>
 <span class="attr">[Unit]</span>
-Description=Apply SPAN flood settings to vmbr2 monitoring bridge
-After=network-online.target
-Wants=network-online.target
+<span class="kw">Description</span>=Apply SPAN flood settings to vmbr2 monitoring bridge
+<span class="kw">After</span>=<span class="val">network-online.target</span>
+<span class="kw">Wants</span>=<span class="val">network-online.target</span>
 
 <span class="attr">[Service]</span>
-Type=oneshot
-ExecStart=<span class="fn">/usr/local/bin/span-flood.sh</span>
-RemainAfterExit=yes
+<span class="kw">Type</span>=<span class="str">oneshot</span>
+<span class="kw">ExecStart</span>=<span class="fn">/usr/local/bin/span-flood.sh</span>
+<span class="kw">RemainAfterExit</span>=<span class="str">yes</span>
 
 <span class="attr">[Install]</span>
-WantedBy=multi-user.target</div>
+<span class="kw">WantedBy</span>=<span class="val">multi-user.target</span></div>
             <p class="validate">Enabled with:<br><code class="inline-code">systemctl daemon-reload &amp;&amp; systemctl enable --now span-flood.service</code></p>
           </div>
 
           <div class="card rule reveal" style="--accent:#F97316;--accent-glow:rgba(249,115,22,0.42);">
             <div class="rule-head"><h3>Bridge Architecture</h3></div>
             <p class="rule-sub">Wazuh and Nessus were originally routed through the same physical interface as Security Onion's management on the SIEM VLAN. To reduce contention on that shared link, I added two dedicated bridges (vmbr4 and vmbr5), each mapped to its own physical NIC, and moved Wazuh and Nessus onto them. This gave each system its own physical path to the switch and significantly reduced the sensor's capture loss.</p>
-            <div class="code">auto vmbr1              <span class="cmt"># management</span>
-iface vmbr1 inet static
-    address 10.0.10.5/24
-    gateway 10.0.10.1
+            <div class="code lang-conf"><span class="kw">auto</span> vmbr1              <span class="cmt"># management</span>
+<span class="kw">iface</span> vmbr1 <span class="kw">inet</span> <span class="kw">static</span>
+    <span class="fn">address</span> <span class="val">10.0.10.5/24</span>
+    <span class="fn">gateway</span> <span class="val">10.0.10.1</span>
 
-auto vmbr2              <span class="cmt"># SPAN input from mirror port</span>
-iface vmbr2 inet manual
-    bridge-ports enp6s0f0
+<span class="kw">auto</span> vmbr2              <span class="cmt"># SPAN input from mirror port</span>
+<span class="kw">iface</span> vmbr2 <span class="kw">inet</span> <span class="kw">manual</span>
+    <span class="fn">bridge-ports</span> <span class="val">enp6s0f0</span>
 
-auto vmbr3              <span class="cmt"># dedicated SO mgmt</span>
-iface vmbr3 inet manual
-    bridge-ports enp6s0f1
+<span class="kw">auto</span> vmbr3              <span class="cmt"># dedicated SO mgmt</span>
+<span class="kw">iface</span> vmbr3 <span class="kw">inet</span> <span class="kw">manual</span>
+    <span class="fn">bridge-ports</span> <span class="val">enp6s0f1</span>
 
-auto vmbr4              <span class="cmt"># dedicated Wazuh</span>
-iface vmbr4 inet manual
-    bridge-ports enp6s0f2
+<span class="kw">auto</span> vmbr4              <span class="cmt"># dedicated Wazuh</span>
+<span class="kw">iface</span> vmbr4 <span class="kw">inet</span> <span class="kw">manual</span>
+    <span class="fn">bridge-ports</span> <span class="val">enp6s0f2</span>
 
-auto vmbr5              <span class="cmt"># dedicated Nessus</span>
-iface vmbr5 inet manual
-    bridge-ports enp6s0f3</div>
+<span class="kw">auto</span> vmbr5              <span class="cmt"># dedicated Nessus</span>
+<span class="kw">iface</span> vmbr5 <span class="kw">inet</span> <span class="kw">manual</span>
+    <span class="fn">bridge-ports</span> <span class="val">enp6s0f3</span></div>
           </div>
 
           <div class="card rule reveal" style="--accent:#F97316;--accent-glow:rgba(249,115,22,0.42);">
@@ -204,15 +204,15 @@ iface vmbr5 inet manual
           <div class="card rule reveal" style="--accent:#3B82F6;--accent-glow:rgba(59,130,246,0.42);">
             <div class="rule-head"><h3>Monitoring &amp; Management Interfaces</h3></div>
             <p class="rule-sub">The management interface (ens18) is set to a static IP on the SIEM VLAN. Two monitoring interfaces (ens19 and ens20) are bonded into bond0, which carries no IP address and passively sniffs the mirrored SPAN traffic rather than routing it. Bonding the two interfaces provides additional capture capacity for the mirrored traffic.</p>
-            <div class="code"><span class="cmt"># ens18 - management</span>
-address1=10.0.20.10/24
-gateway=10.0.20.1
-method=manual
+            <div class="code lang-conf"><span class="cmt"># ens18 - management</span>
+<span class="attr">address1</span>=<span class="val">10.0.20.10/24</span>
+<span class="attr">gateway</span>=<span class="val">10.0.20.1</span>
+<span class="attr">method</span>=<span class="str">manual</span>
 
 <span class="cmt"># ens19 + ens20 - monitoring (passive, bonded)</span>
 <span class="cmt"># bonded into bond0, no IP, round-robin</span>
-autoconnect=false
-method=disabled</div>
+<span class="attr">autoconnect</span>=<span class="str">false</span>
+<span class="attr">method</span>=<span class="str">disabled</span></div>
           </div>
         </div>
 
@@ -227,9 +227,28 @@ method=disabled</div>
           <div class="card rule reveal" style="--accent:#EF4444;--accent-glow:rgba(239,68,68,0.42);">
             <div class="rule-head"><h3>Wazuh Agent Event-Channel Tuning</h3></div>
             <p class="rule-sub">Curated which Windows events forward to the manager rather than shipping everything: a Security channel filtered to the detection-relevant Event IDs, a Sysmon channel, and a noise-exclusion query that drops high-volume events. This keeps the pipeline focused on what matters.</p>
-            <div class="code"><span class="tag">&lt;query&gt;</span>Event/System[EventID=4662 or EventID=4625 or
+            <div class="code lang-xml"><span class="tag">&lt;query&gt;</span>Event/System[EventID=4662 or EventID=4625 or
  EventID=4624 or EventID=4768 or EventID=4769 or
  EventID=4776 or EventID=1102]<span class="tag">&lt;/query&gt;</span></div>
+          </div>
+
+          <div class="card rule reveal" style="--accent:#EF4444;--accent-glow:rgba(239,68,68,0.42);">
+            <div class="rule-head"><h3>Host-Based Detection Enhancements</h3></div>
+            <p class="rule-sub">Deployed Sysmon and Wazuh File Integrity Monitoring on the domain controller to deepen host-based detection alongside the network sensors.</p>
+            <p class="validate">Applying the MITRE-mapped Sysmon ruleset:</p>
+            <div class="code lang-shell"><span class="fn">sysmon64.exe</span> -c <span class="val">sysmonconfig.xml</span></div>
+            <p class="validate">Forwarding Sysmon events to the SIEM:</p>
+            <div class="code lang-xml"><span class="tag">&lt;localfile&gt;</span>
+  <span class="tag">&lt;location&gt;</span>Microsoft-Windows-Sysmon/Operational<span class="tag">&lt;/location&gt;</span>
+  <span class="tag">&lt;log_format&gt;</span>eventchannel<span class="tag">&lt;/log_format&gt;</span>
+<span class="tag">&lt;/localfile&gt;</span></div>
+            <p class="validate">Real-time file integrity monitoring:</p>
+            <div class="code lang-xml"><span class="tag">&lt;directories</span> <span class="attr">check_all</span>=<span class="str">"yes"</span> <span class="attr">realtime</span>=<span class="str">"yes"</span><span class="tag">&gt;</span>C:\Windows\System32\drivers\etc<span class="tag">&lt;/directories&gt;</span>
+<span class="tag">&lt;directories</span> <span class="attr">check_all</span>=<span class="str">"yes"</span> <span class="attr">realtime</span>=<span class="str">"yes"</span><span class="tag">&gt;</span>C:\Users\Administrator\Downloads<span class="tag">&lt;/directories&gt;</span>
+<span class="tag">&lt;directories</span> <span class="attr">check_all</span>=<span class="str">"yes"</span><span class="tag">&gt;</span>C:\Windows\System32\config<span class="tag">&lt;/directories&gt;</span>
+<span class="tag">&lt;directories</span> <span class="attr">check_all</span>=<span class="str">"yes"</span> <span class="attr">realtime</span>=<span class="str">"yes"</span><span class="tag">&gt;</span>C:\FIM-Test<span class="tag">&lt;/directories&gt;</span></div>
+            <p class="validate">Monitoring persistence registry keys:</p>
+            <div class="code lang-xml"><span class="tag">&lt;windows_registry</span> <span class="attr">arch</span>=<span class="str">"both"</span><span class="tag">&gt;</span>HKLM\Software\Microsoft\Windows\CurrentVersion\Run<span class="tag">&lt;/windows_registry&gt;</span></div>
           </div>
 
           <div class="card rule reveal" style="--accent:#EF4444;--accent-glow:rgba(239,68,68,0.42);">
@@ -244,7 +263,7 @@ method=disabled</div>
           <div class="card rule reveal" style="--accent:#22C55E;--accent-glow:rgba(34,197,94,0.42);">
             <div class="rule-head"><h3>Wazuh Agent Auto-Start (rc.local)</h3><span class="pill ok">Validated</span></div>
             <p class="rule-sub">The Wazuh agent on Metasploitable (Ubuntu 14.04, SysV init) was linked as <code class="inline-code">K20</code>, which stops it at boot instead of starting it, so host detection on that box kept dropping. Because it is too old for systemd, I force-start the agent from <code class="inline-code">/etc/rc.local</code> on every boot.</p>
-            <div class="code"><span class="cmt"># /etc/rc.local  (add before the "exit 0" line)</span>
+            <div class="code lang-shell"><span class="cmt"># /etc/rc.local  (add before the "exit 0" line)</span>
 <span class="fn">/var/ossec/bin/wazuh-control</span> start
 
 <span class="cmt"># make sure rc.local is executable so it runs at boot</span>
